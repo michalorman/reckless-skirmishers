@@ -16,10 +16,10 @@ public final class Screen extends ImageBitmap {
     private JFrame frame;
     private JPanel panel;
     private BufferStrategy bufferStrategy;
-    private double scale;
-    private String title;
-    private int frameW;
-    private int frameH;
+    private final double scale;
+    private final String title;
+    private final int frameW;
+    private final int frameH;
 
     private Screen(Builder builder) {
         super(builder.w, builder.h);
