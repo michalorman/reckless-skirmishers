@@ -1,0 +1,17 @@
+*.class
+target/
+out/
+
+*~
+\#*\#
+.#*
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+
+*.iml
+*.ipr
+*.iws
+.idea/
