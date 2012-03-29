@@ -1,1 +1,34 @@
 apply plugin: 'java'
+
+sourceCompatibility: 1.7
+targetCompatibility: 1.7
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'ch.qos.logback:logback-classic:1.0.1'
+    compile 'org.slf4j:slf4j-api:1.6.4'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.domain.reckless.core.Launcher'
+    }
+}
+
+task copyScripts(type: Copy) {
+    from 'src/main/script'
+    into 'build/reckless-skirmishers'
+}
+
+task copyLibs(type: Copy, dependsOn: 'jar') {
+    from 'build/libs'
+    into 'build/reckless-skirmishers/lib'
+}
+
+task buildPackage() {
+    dependsOn 'copyLibs'
+    dependsOn 'copyScripts'
+}
