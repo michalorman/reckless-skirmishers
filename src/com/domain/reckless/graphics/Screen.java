@@ -18,11 +18,15 @@ public final class Screen extends ImageBitmap {
     private BufferStrategy bufferStrategy;
     private double scale;
     private String title;
+    private int frameW;
+    private int frameH;
 
     private Screen(Builder builder) {
-        super(builder.w * builder.scale, builder.h * builder.scale);
+        super(builder.w, builder.h);
         scale = builder.scale;
         title = builder.title;
+        frameW = (int) (w * scale);
+        frameH = (int) (h * scale);
         initFrame();
         initPanel();
         initCanvas();
@@ -34,18 +38,18 @@ public final class Screen extends ImageBitmap {
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(w, h));
+        frame.setSize(new Dimension(frameW, frameH));
     }
 
     private void initPanel() {
         panel = (JPanel) frame.getContentPane();
-        panel.setPreferredSize(new Dimension(w, h));
+        panel.setPreferredSize(new Dimension(frameW, frameH));
         panel.setLayout(null);
     }
 
     private void initCanvas() {
         Canvas canvas = new Canvas();
-        canvas.setBounds(0, 0, w, h);
+        canvas.setBounds(0, 0, frameW, frameH);
         canvas.setIgnoreRepaint(true);
         panel.add(canvas);
         //After adding to panel we can create buffers.
@@ -60,7 +64,7 @@ public final class Screen extends ImageBitmap {
 
     public void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-        g.clearRect(0, 0, w, h);
+        g.clearRect(0, 0, frameW, frameH);
         g.scale(scale, scale);
         render(g);
         g.dispose();
