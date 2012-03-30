@@ -13,8 +13,8 @@ public class Rect {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("x1: ").append(x1).append(" y1: ").append(y1).append(" x2: ").append(x2)
-                .append(" y2: ").append(y2);
+        sb.append("Rect[x1: ").append(x1).append(" y1: ").append(y1).append(" x2: ").append(x2)
+                .append(" y2: ").append(y2).append("]");
         return sb.toString();
     }
 }

@@ -44,33 +44,9 @@ public class Bitmap {
         return pixels[y * w + x];
     }
 
-    //TODO Check boundaries. Check performance gain with direct array access (not PutPixe()l/GetPixel()).
-    public void blit(Bitmap dst, int x, int y) {
-        for (int yy = 0; yy < h; yy++) {
-            for (int xx = 0; xx < w; xx++) {
-                int col = pixels[yy * w + xx];
-                int alpha = (col >> 24) & 0xff;
-                if (alpha == 0xff) {
-//                    dst.pixels[(yy + y) * dst.w + (xx + x)] = col;
-                    dst.putPixel(x + xx, y + yy, col);
-                } else {
-                    try {
-                        int bgCol = dst.getPixel(x + xx, y + yy);
-                        int blendedCol = PixelUtils.blendColors(bgCol, col);
-                        dst.putPixel(x + xx, y + yy, blendedCol);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-//                    int bgCol = dst.pixels[(y + yy) * dst.w + (x + xx)];
-//                    dst.pixels[(yy + y) * dst.w + (xx + x)] = PixelUtils.blendColors(bgCol, col);
-                }
-            }
-        }
-    }
-
-    public void optimizedBlit(Bitmap bitmap, int x, int y) {
+    public void blit(Bitmap bitmap, int x, int y) {
         Rect blitArea = new Rect(x, y, x + bitmap.w, y + bitmap.h);
         adjustBlitArea(blitArea);
-        System.out.println(blitArea);
         int blitWidth = blitArea.x2 - blitArea.x1;
         for (int yy = blitArea.y1; yy < blitArea.y2; yy++) {
             int targetPixel = yy * w + blitArea.x1;
@@ -97,7 +73,7 @@ public class Bitmap {
         if (blitArea.x1 < 0) blitArea.x1 = 0;
         if (blitArea.y1 < 0) blitArea.y1 = 0;
         if (blitArea.x2 > w) blitArea.x2 = w;
-        if (blitArea.y2 > h) blitArea.y1 = h;
+        if (blitArea.y2 > h) blitArea.y2 = h;
         return blitArea;
     }
 

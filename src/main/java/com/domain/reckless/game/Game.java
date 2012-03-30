@@ -3,8 +3,6 @@ package com.domain.reckless.game;
 import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 
-import java.awt.*;
-
 public class Game implements Runnable {
     private final static int TEST_OBJECTS = 1000;
 
@@ -26,9 +24,9 @@ public class Game implements Runnable {
         for (int i = 0; i < bmp.length; i++) {
             bmp[i] = Bitmap.loadTile("/home/twojcik/slave.png", 0, 0, 32, 32);
         }
-        bmp2 = Bitmap.loadTile("/home/twojcik/slave.png", 1, 1, 32, 32);
-        bg = Bitmap.load("/home/twojcik/bg.png");
-    }
+        bmp2 = Bitmap.loadTile("d:/stuff//slave.png", 1, 1, 32, 32);
+        bg = Bitmap.load("d:/stuff/bg.png");
+}
 
     public void run() {
         int fps = 0;
@@ -42,21 +40,11 @@ public class Game implements Runnable {
         int maxFps = 0;
         beforeTime = System.currentTimeMillis();
         while (true) {
-
-            /*
-            int yy = 0;
-            for (int i = 0; i < bmp.length; i++) {
-                bmp[i].blit(screen, (int) (Math.random() * 320) , (int) (Math.random() * 150));
+            screen.blit(bg, 0, 0);
+            for (int i = 0; i < 500; i ++) {
+            screen.blit(bmp2, (int) (Math.random() * 320), (int) (Math.random() * 200));
             }
-            */
-            screen.optimizedBlit(bg, 0 ,0);
-            screen.optimizedBlit(bmp2, 10, 0);
             x++;
-            Graphics2D g = screen.getGraphics2D();
-            g.setColor(Color.BLUE);
-            g.fillRect(0, 300, 300, 400);
-            g.setColor(Color.WHITE);
-            g.drawString("FPS: " + String.valueOf(fps) + " min: " + minFps + " max: " + maxFps + " sum(avg): " + avgFps, 0, 380);
             screen.render();
             deltaTime = System.currentTimeMillis() - beforeTime;
             sleepTime = period - deltaTime;
@@ -73,12 +61,13 @@ public class Game implements Runnable {
             ticks++;
             beforeTime = System.currentTimeMillis();
             fps = 1000 / ((int) period + timeOver);
+                System.out.println(fps);
             sumFps+=fps;
             if (fps > maxFps) maxFps = fps;
             if (ticks > 100)
                 if (fps < minFps) minFps = fps;
-//            System.out.println(fps);
             avgFps = sumFps/  ticks;
+
         }
     }
 }
