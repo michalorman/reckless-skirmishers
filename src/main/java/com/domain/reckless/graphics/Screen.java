@@ -6,20 +6,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-
 /* Usage:
     Screen screen = new Screen.Builder(320, 200).scale(2.0).build();
     screen.putPixel(100, 100, 0xff00ff);
     !!! Remember to invoke screen.render() in the main loop.
  */
-public final class Screen extends ImageBitmap {
-    private JFrame frame;
-    private JPanel panel;
-    private BufferStrategy bufferStrategy;
-    private final double scale;
-    private final String title;
-    private final int frameW;
-    private final int frameH;
+public class Screen extends ImageBitmap {
+    protected JFrame frame;
+    protected JPanel panel;
+    protected BufferStrategy bufferStrategy;
+    protected final double scale;
+    protected final String title;
+    protected final int frameW;
+    protected final int frameH;
 
     private Screen(Builder builder) {
         super(builder.w, builder.h);
@@ -53,18 +52,15 @@ public final class Screen extends ImageBitmap {
         canvas.setIgnoreRepaint(true);
         panel.add(canvas);
         //After adding to panel we can create buffers.
-        canvas.createBufferStrategy(2);
+        canvas.createBufferStrategy(2); //Double bufferinng.
         bufferStrategy = canvas.getBufferStrategy();
-        Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-        g.scale(scale, scale);
         canvas.requestFocus();
-        canvas.setBackground(Color.black);
+        canvas.setBackground(Color.blue);
         frame.pack();
     }
 
     public void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-        g.clearRect(0, 0, frameW, frameH);
         g.scale(scale, scale);
         render(g);
         g.dispose();
@@ -73,6 +69,10 @@ public final class Screen extends ImageBitmap {
 
     protected void render(Graphics2D g) {
         g.drawImage(image, 0, 0, w, h, null);
+    }
+
+    public Graphics2D getGraphics2D() {
+        return (Graphics2D) bufferStrategy.getDrawGraphics();
     }
 
     public static class Builder {
@@ -84,10 +84,6 @@ public final class Screen extends ImageBitmap {
         public Builder(int w, int h) {
             this.w = w;
             this.h = h;
-        }
-
-        public Builder(double w, double h) {
-            this((int) w, (int) h);
         }
 
         public Builder scale(double scale) {
