@@ -17,6 +17,7 @@ public class DefaultGameLoop implements GameLoop {
     }
 
     public void run() {
+        LOGGER.debug("Executing main loop");
         while (isRunning) {
 
         }

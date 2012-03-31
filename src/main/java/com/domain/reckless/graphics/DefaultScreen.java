@@ -1,6 +1,8 @@
 package com.domain.reckless.graphics;
 
 import com.domain.reckless.graphics.bitmap.ImageBitmap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +14,7 @@ import java.awt.image.BufferStrategy;
     !!! Remember to invoke screen.render() in the main loop.
  */
 public class DefaultScreen extends ImageBitmap implements Screen {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultScreen.class);
     protected JFrame frame;
     protected JPanel panel;
     protected BufferStrategy bufferStrategy;
@@ -22,6 +25,7 @@ public class DefaultScreen extends ImageBitmap implements Screen {
 
     private DefaultScreen(Builder builder) {
         super(builder.w, builder.h);
+        LOGGER.info("Initializing default screen");
         scale = builder.scale;
         title = builder.title;
         frameW = (int) (w * scale);
@@ -36,7 +40,7 @@ public class DefaultScreen extends ImageBitmap implements Screen {
         frame.setTitle(title);
         frame.setResizable(false);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(new Dimension(frameW, frameH));
     }
 
