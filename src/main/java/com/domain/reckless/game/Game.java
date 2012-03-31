@@ -2,6 +2,7 @@ package com.domain.reckless.game;
 
 import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.graphics.bitmap.Bitmap;
+import com.domain.reckless.graphics.font.BitmapFont;
 
 public class Game implements Runnable {
     private final static int TEST_OBJECTS = 1000;
@@ -15,6 +16,7 @@ public class Game implements Runnable {
     private Bitmap[] bmp;
     private Bitmap bmp2;
     private Bitmap bg;
+    private BitmapFont font;
 
     long period = 10;
 
@@ -26,6 +28,9 @@ public class Game implements Runnable {
         }
         bmp2 = Bitmap.loadTile("d:/stuff//slave.png", 1, 1, 32, 32);
         bg = Bitmap.load("d:/stuff/bg.png");
+
+        String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ___/0123456789-.!?/%$\\=*+,;:()&#\"'";
+        font = BitmapFont.load("D:\\Catacomb-Snatch\\res\\art\\fonts\\font_gold.png", letters, 8, 8);
 }
 
     public void run() {
@@ -39,12 +44,19 @@ public class Game implements Runnable {
         int minFps = 1000;
         int maxFps = 0;
         beforeTime = System.currentTimeMillis();
+        Bitmap singleLetter = Bitmap.loadTile("D:\\Catacomb-Snatch\\res\\art\\fonts\\font_gold.png",0, 0, 8, 8);
+        Bitmap fontBmp = Bitmap.load("D:\\Catacomb-Snatch\\res\\art\\fonts\\font_gold.png");
+        Bitmap cut = fontBmp.cut(0, 8, 8, 8);
         while (true) {
             screen.blit(bg, 0, 0);
-            for (int i = 0; i < 500; i ++) {
-            screen.blit(bmp2, (int) (Math.random() * 320), (int) (Math.random() * 200));
+
+            for (int i = 0; i < 5; i ++) {
+                screen.blit(bmp2, (int) (Math.random() * 320), (int) (Math.random() * 200));
             }
+
             x++;
+            screen.write(font, 0, 0, "FPS " + fps);
+            System.out.println(fps);
             screen.render();
             deltaTime = System.currentTimeMillis() - beforeTime;
             sleepTime = period - deltaTime;
@@ -61,12 +73,6 @@ public class Game implements Runnable {
             ticks++;
             beforeTime = System.currentTimeMillis();
             fps = 1000 / ((int) period + timeOver);
-                System.out.println(fps);
-            sumFps+=fps;
-            if (fps > maxFps) maxFps = fps;
-            if (ticks > 100)
-                if (fps < minFps) minFps = fps;
-            avgFps = sumFps/  ticks;
 
         }
     }
