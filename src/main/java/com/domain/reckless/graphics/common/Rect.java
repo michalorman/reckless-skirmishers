@@ -12,9 +12,11 @@ public class Rect {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Rect[x1: ").append(x1).append(" y1: ").append(y1).append(" x2: ").append(x2)
-                .append(" y2: ").append(y2).append("]");
-        return sb.toString();
+        return "Rect{" +
+                "x1=" + x1 +
+                ", y1=" + y1 +
+                ", x2=" + x2 +
+                ", y2=" + y2 +
+                '}';
     }
 }

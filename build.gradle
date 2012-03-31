@@ -8,6 +8,9 @@ repositories {
     mavenCentral()
 }
 
+sourceSets.main.resources.srcDirs =
+    ['src/main/resources', 'src/main/images', 'src/main/sound']
+
 dependencies {
     compile 'ch.qos.logback:logback-classic:1.0.1'
     compile 'org.slf4j:slf4j-api:1.6.4'
@@ -17,21 +20,30 @@ jar {
     // create fat-jar
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest {
-        attributes 'Main-Class': 'com.domain.reckless.game.RecklessSkirmishers'
+        attributes 'Main-Class': 'com.domain.reckless.core.RecklessSkirmishers'
     }
 }
 
 task copyScripts(type: Copy) {
+    description 'Copy script files to build package'
     from 'src/main/script'
     into 'build/reckless-skirmishers'
 }
 
 task copyLibs(type: Copy, dependsOn: 'jar') {
+    description 'Copy libs to build package'
     from 'build/libs'
     into 'build/reckless-skirmishers/lib'
 }
 
 task buildPackage() {
+    description 'Builds project and prepares distribution package'
     dependsOn 'copyLibs'
     dependsOn 'copyScripts'
+}
+
+task run(type: Exec) {
+    description 'Build and run application'
+    workingDir 'build/reckless-skirmishers'
+    commandLine '/.reckless-skirmishers.sh'
 }
