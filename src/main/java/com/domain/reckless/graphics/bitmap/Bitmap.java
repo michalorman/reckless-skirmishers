@@ -1,9 +1,11 @@
 package com.domain.reckless.graphics.bitmap;
 
 import com.domain.reckless.graphics.common.Rect;
+import com.domain.reckless.graphics.font.BitmapFont;
 import com.domain.reckless.graphics.utils.PixelUtils;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -65,6 +67,22 @@ public class Bitmap {
         }
     }
 
+    public Bitmap cut(int x, int y, int w, int h) {
+        Rectangle toBeCutArea = new Rectangle(x, y, w, h);
+        Rectangle wholeArea = new Rectangle(0, 0, this.w, this.h);
+        Rectangle cutArea = wholeArea.intersection(toBeCutArea);
+        Bitmap bitmap = new Bitmap(cutArea.width, cutArea.height);
+        for (int yy = y; yy < y + cutArea.height; yy++) {
+            System.arraycopy(pixels, yy * this.w + cutArea.x, bitmap.pixels, (yy - y) * bitmap.w, cutArea.width);
+        }
+        return bitmap;
+    }
+
+    //TODO move Font.write() body to this method?
+    public void write(BitmapFont font, int x, int y, String message) {
+        font.write(this, x, y, message);
+    }
+
     private boolean isValidPosition(int x, int y) {
         return x >= 0 && x < w && y >= 0 && y < h;
     }
@@ -77,18 +95,25 @@ public class Bitmap {
         return blitArea;
     }
 
+    public int getWidth() {
+        return w;
+    }
+
+    public int getHeight() {
+        return h;
+    }
+
     public static Bitmap load(String filename) {
-        Bitmap bitmap;
         try {
             BufferedImage bi = ImageIO.read(new File(filename));
             int biWidth = bi.getWidth();
             int biHeight = bi.getHeight();
-            bitmap = new Bitmap(biWidth, biHeight);
+            Bitmap bitmap = new Bitmap(biWidth, biHeight);
             bi.getRGB(0, 0, biWidth, biHeight, bitmap.pixels, 0, biWidth);
+            return bitmap;
         } catch (IOException e) {
             return null;
         }
-        return bitmap;
     }
 
     public static Bitmap loadTile(String filename, int tileX, int tileY, int tileW, int tileH) {
@@ -102,22 +127,21 @@ public class Bitmap {
         }
     }
 
-    public static Bitmap[][] loadTiles(String filename, int tileX, int tileY, int tileW, int tileH) {
-        try {
-            BufferedImage bi = ImageIO.read(new File(filename));
-            Bitmap[][] bitmaps = new Bitmap[bi.getHeight() / tileH][];
-            for (int y = 0; y < bi.getHeight() / tileH; y++) {
-                bitmaps[y] = new Bitmap[bi.getWidth() / tileW];
-                for (int x = 0; x < bi.getWidth() / tileW; x++) {
-                    Bitmap bitmap = new Bitmap(tileW, tileH);
-                    bi.getRGB(x + (tileX * tileW), y + (tileY * tileH), tileW, tileH, bitmap.pixels, 0, tileW);
-                    bitmaps[y][x] = bitmap;
+    public static Bitmap[][] loadTiles(String filename, int tileW, int tileH) {
+        Bitmap bitmap = load(filename);
+        if (bitmap != null) {
+            Bitmap[][] bitmaps = new Bitmap[bitmap.h / tileH][];
+            int cols = bitmap.w / tileW;
+            for (int y = 0; y < bitmap.h / tileH; y++) {
+                bitmaps[y] = new Bitmap[cols];
+                for (int x = 0; x < cols; x++) {
+                    Bitmap tile = bitmap.cut(x * tileW, y * tileH, tileW, tileH);
+                    bitmaps[y][x] = tile;
                 }
             }
             return bitmaps;
-        } catch (IOException e) {
-            return null;
         }
+        return null;
     }
 
 }
