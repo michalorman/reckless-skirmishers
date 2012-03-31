@@ -1,6 +1,6 @@
 package com.domain.reckless.game;
 
-import com.domain.reckless.graphics.Screen;
+import com.domain.reckless.graphics.DefaultScreen;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 
 public class Game implements Runnable {
@@ -9,7 +9,7 @@ public class Game implements Runnable {
     private int x = 30;
     private int y = 0;
     private int alpha = 0;
-    private Screen screen;
+    private DefaultScreen screen;
     private int dir = 1;
 
     private Bitmap[] bmp;
@@ -19,7 +19,7 @@ public class Game implements Runnable {
     long period = 10;
 
     public Game() {
-        screen = new Screen.Builder(320, 200).scale(2.0).title("Reckless Skirmishers").build();
+        screen = new DefaultScreen.Builder(320, 200).scale(2.0).title("Reckless Skirmishers").build();
         bmp = new Bitmap[TEST_OBJECTS];
         for (int i = 0; i < bmp.length; i++) {
             bmp[i] = Bitmap.loadTile("/home/twojcik/slave.png", 0, 0, 32, 32);
