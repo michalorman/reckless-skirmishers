@@ -40,7 +40,7 @@ public class InMemorySettings implements Settings {
 
     @Override
     public int getSettingAsInt(Setting setting) {
-        return Integer.valueOf(settings.get(setting));
+        return Integer.valueOf(getSetting(setting));
     }
 
     @Override

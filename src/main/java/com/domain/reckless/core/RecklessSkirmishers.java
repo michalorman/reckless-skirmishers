@@ -2,7 +2,7 @@ package com.domain.reckless.core;
 
 import com.domain.reckless.core.setting.InMemorySettings;
 import com.domain.reckless.core.setting.Settings;
-import com.domain.reckless.game.DefaultGameLoop;
+import com.domain.reckless.game.FixedLengthGameLoop;
 import com.domain.reckless.game.GameLoop;
 import com.domain.reckless.graphics.DefaultScreen;
 import com.domain.reckless.i18n.I18n;
@@ -74,7 +74,7 @@ public class RecklessSkirmishers {
                     .scale(2.0)
                     .title(i18n.t("game.ui.title"))
                     .build();
-            GameLoop gameLoop = new DefaultGameLoop(screen);
+            GameLoop gameLoop = new FixedLengthGameLoop(screen);
             Thread thread = new Thread(gameLoop);
             thread.start();
         } catch (IOException e) {
