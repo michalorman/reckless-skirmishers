@@ -61,6 +61,7 @@ public class Screen extends ImageBitmap {
 
     public void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+        g.clearRect(0, 0, w, h);
         g.scale(scale, scale);
         render(g);
         g.dispose();
