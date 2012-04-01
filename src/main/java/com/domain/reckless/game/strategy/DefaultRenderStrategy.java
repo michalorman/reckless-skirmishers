@@ -14,8 +14,9 @@ public class DefaultRenderStrategy implements RenderStrategy {
     }
 
     @Override
-    public void render(Set<? extends Renderable> renderables) {
+    public void render(Set<? extends Renderable> renderables, int fps) {
         screen.blit(Assets.Bitmaps.background, 0, 0);
+        screen.write(Assets.Fonts.font, 5, 5, fps + " FPS");
         for (Renderable renderable : renderables) {
             renderable.render(screen);
         }

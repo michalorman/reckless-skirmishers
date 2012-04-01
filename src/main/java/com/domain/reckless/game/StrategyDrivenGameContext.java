@@ -32,6 +32,7 @@ public class StrategyDrivenGameContext implements GameContext {
         // TODO: test objects
         Player player = new Player();
         player.pos = new Vect2D(100, 100);
+        player.delta = new Vect2D(1.5, 1.5);
         objects.add(player);
     }
 
@@ -46,7 +47,7 @@ public class StrategyDrivenGameContext implements GameContext {
     }
 
     @Override
-    public void render(float interpolation) {
-        renderStrategy.render(objects);
+    public void render(float interpolation, int fps) {
+        renderStrategy.render(objects, fps);
     }
 }

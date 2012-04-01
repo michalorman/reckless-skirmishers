@@ -21,7 +21,7 @@ public interface GameContext {
      * Render the game.
      *
      * @param interpolation the value of interpolation.
+     * @param fps
      */
-    void render(float interpolation);
-
+    void render(float interpolation, int fps);
 }
