@@ -10,16 +10,18 @@ public class FixedLengthGameLoop implements GameLoop {
     private static final int MAX_UPDATES_PER_RENDER = Integer.MAX_VALUE;
 
     // desired updates rate
-    private static final double UPDATES_RATE = 3;
+    private static final double UPDATES_RATE = 30;
 
     // time between game updates
     private static final double UPDATES_INTERVAL = 1000000000 / UPDATES_RATE;
 
     // desired frame rate
-    private static final double FRAMES_RATE = 6;
+    private static final double FRAMES_RATE = 60;
 
     // time between each render
     private static final double RENDERS_INTERVAL = 1000000000 / FRAMES_RATE;
+
+    private static final double FPS_UPDATE_INTERVAL = 1000000000;
 
     private GameContext context;
 
@@ -37,6 +39,10 @@ public class FixedLengthGameLoop implements GameLoop {
         double now;
         int updatesCount;
 
+        int frames = 0;
+        int fps = (int) FRAMES_RATE;
+        double lastFpsUpdateTime = System.nanoTime();
+
         while (context.isRunning()) {
             now = System.nanoTime();
             updatesCount = 0;
@@ -49,8 +55,15 @@ public class FixedLengthGameLoop implements GameLoop {
 
             if (now - lastRenderTime > RENDERS_INTERVAL) {
                 float delta = Math.min(1.0f, (float) ((now - lastUpdateTime) / UPDATES_INTERVAL));
-                context.render(delta);
+                context.render(delta, fps);
                 lastRenderTime = now;
+                ++frames;
+            }
+
+            if (now - lastFpsUpdateTime > FPS_UPDATE_INTERVAL) {
+                fps = frames;
+                frames = 0;
+                lastFpsUpdateTime = now;
             }
 
             try {

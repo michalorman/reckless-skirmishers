@@ -11,7 +11,11 @@ public class Player extends GameObject {
 
     @Override
     public void update() {
-        pos.x += (Math.random() * 3) - 1;
-        pos.y += (Math.random() * 3) - 1;
+        pos.x += sign() * delta.x;
+        pos.y += sign() * delta.y;
+    }
+
+    private double sign() {
+         return (Math.random() * 2) - 1 >= 0 ? 1 : -1;
     }
 }
