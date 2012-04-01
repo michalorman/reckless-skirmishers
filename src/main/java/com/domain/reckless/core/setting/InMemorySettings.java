@@ -19,8 +19,8 @@ public class InMemorySettings implements Settings {
     public void applyDefaults() {
         defaults.put(Setting.LOCALE, "en");
         defaults.put(Setting.DRAW_FPS, "1");
-        defaults.put(Setting.SCREEN_WIDTH, "320");
-        defaults.put(Setting.SCREEN_HEIGHT, "200");
+        defaults.put(Setting.SCREEN_WIDTH, "512");
+        defaults.put(Setting.SCREEN_HEIGHT, "384");
 
         verifyDefaults();
     }
