@@ -1,21 +1,28 @@
 package com.domain.reckless.graphics;
 
-import com.domain.reckless.graphics.bitmap.ImageBitmap;
+import com.domain.reckless.core.controls.Keyboard;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-public class ApplicationFrame extends JFrame {
-    private ImageBitmap imageBitmap;
+public class SwingApplicationFrame extends JFrame implements FrameContext {
     private BufferStrategy bufferStrategy;
     private double scale;
+    //Context
+    private Keyboard keyboard;
+    private DefaultScreen screen;
 
-    public ApplicationFrame(Builder builder) {
+    public SwingApplicationFrame(Builder builder) {
+        initGraphics(builder);
+        initKeyboard();
+    }
+
+    private void initGraphics(Builder builder) {
         scale = builder.scale;
         int w = (int) (builder.w * scale);
         int h = (int) (builder.h * scale);
-        imageBitmap = builder.imageBitmap;
+        screen = new DefaultScreen(builder.w, builder.h, this);
         //Basic initialization
         setTitle(builder.title);
         setResizable(builder.resizable);
@@ -29,40 +36,49 @@ public class ApplicationFrame extends JFrame {
         Canvas canvas = new Canvas();
         canvas.setBounds(0, 0, w, h);
         canvas.setIgnoreRepaint(true);
+        canvas.setFocusable(false);
         panel.add(canvas);
+        panel.setFocusable(false);
         //We have canvas in panel, so now we can create buffers.
         canvas.createBufferStrategy(2);
         bufferStrategy = canvas.getBufferStrategy();
-        canvas.requestFocus();
         canvas.setBackground(Color.black);
         pack();
     }
 
+    private void initKeyboard() {
+        keyboard = new Keyboard();
+        addKeyListener(keyboard);
+        requestFocus();
+    }
+
     public void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-        g.clearRect(0, 0, imageBitmap.getWidth(), imageBitmap.getHeight());
+        g.clearRect(0, 0, screen.getWidth(), screen.getHeight());
         g.scale(scale, scale);
-        render(g);
+        g.drawImage(screen.getImage(), 0, 0, screen.getWidth(), screen.getHeight(), null);
         g.dispose();
         bufferStrategy.show();
     }
 
-    protected void render(Graphics2D g) {
-        g.drawImage(imageBitmap.getImage(), 0, 0, imageBitmap.getWidth(), imageBitmap.getHeight(), null);
+    public Screen getScreen() {
+        return screen;
+    }
+
+    public Keyboard getKeyboard() {
+        return keyboard;
     }
 
     public static class Builder {
         private final int w;
         private final int h;
-        private ImageBitmap imageBitmap;
         private double scale = 1.0;
         private boolean resizable = false;
         private String title;
 
-        public Builder(int w, int h, ImageBitmap imageBitmap) {
+        public Builder(int w, int h) {
             this.w = w;
             this.h = h;
-            this.imageBitmap = imageBitmap;
         }
 
         public Builder scale(double scale) {
@@ -80,8 +96,8 @@ public class ApplicationFrame extends JFrame {
             return this;
         }
 
-        public ApplicationFrame build() {
-            return new ApplicationFrame(this);
+        public SwingApplicationFrame build() {
+            return new SwingApplicationFrame(this);
         }
     }
 }

@@ -8,8 +8,9 @@ import com.domain.reckless.game.GameLoop;
 import com.domain.reckless.game.StrategyDrivenGameContext;
 import com.domain.reckless.game.strategy.DefaultRenderStrategy;
 import com.domain.reckless.game.strategy.DefaultUpdateStrategy;
-import com.domain.reckless.graphics.DefaultScreen;
+import com.domain.reckless.graphics.FrameContext;
 import com.domain.reckless.graphics.Screen;
+import com.domain.reckless.graphics.SwingApplicationFrame;
 import com.domain.reckless.i18n.I18n;
 import com.domain.reckless.i18n.PropertiesI18n;
 import org.slf4j.Logger;
@@ -75,11 +76,13 @@ public class RecklessSkirmishers {
         try {
             I18n i18n = new PropertiesI18n(settings);
 
-            Screen screen = new DefaultScreen.Builder(settings.getSettingAsInt(Settings.Setting.SCREEN_WIDTH),
+            FrameContext frameContext = new SwingApplicationFrame.Builder(
+                    settings.getSettingAsInt(Settings.Setting.SCREEN_WIDTH),
                     settings.getSettingAsInt(Settings.Setting.SCREEN_HEIGHT))
                     .scale(2.0)
                     .title(i18n.t("game.ui.title"))
                     .build();
+            Screen screen = frameContext.getScreen();
 
             GameContext context = new StrategyDrivenGameContext(
                     new DefaultUpdateStrategy(),
