@@ -1,6 +1,7 @@
 package com.domain.reckless.game;
 
-import com.domain.reckless.graphics.DefaultScreen;
+import com.domain.reckless.graphics.Screen;
+import com.domain.reckless.graphics.SwingApplicationFrame;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.graphics.font.BitmapFont;
 
@@ -10,7 +11,7 @@ import java.util.TimerTask;
 
 public class Game implements Runnable {
     private final static int OBJECTS_COUNT = 3000;
-    private DefaultScreen screen;
+    private Screen screen;
     private Bitmap object;
     private Bitmap bg;
     private BitmapFont font;
@@ -18,11 +19,13 @@ public class Game implements Runnable {
     private UpdateFps updateFps;
     int frames = 0;
     int fps = 0;
+    SwingApplicationFrame applicationFrame;
 
     public Game() {
-        screen = new DefaultScreen.Builder(320, 200).scale(2.0).title("Reckless Skirmishers").build();
-        object = Bitmap.loadTile("d:/stuff//slave.png", 1, 1, 32, 32);
+        applicationFrame = new SwingApplicationFrame.Builder(320, 200).scale(2).build();
+        screen = applicationFrame.getScreen();
         bg = Bitmap.load("d:/stuff/bg.png");
+        object = Bitmap.loadTile("d:\\stuff\\slave.png", 1, 1, 32, 32);
 
         String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ___/0123456789-.!?/%$\\=*+,;:()&#\"'";
         font = BitmapFont.load("D:\\Catacomb-Snatch\\res\\art\\fonts\\font_gold.png", letters, 8, 8);
@@ -35,17 +38,21 @@ public class Game implements Runnable {
 
         Timer cameraTimer = new Timer();
         cameraTimer.schedule(new CameraMove(camera, 0, 0), 0, 10);
-        while (true) {
-//            screen.blit(bg, 0, 0);
-//            screen.putPixel(100, 100, 0xffffff);
-//            screen.render();
 
-            screen.setOffset(camera.x, camera.y);
+        int x = 0;
+        int y = 0;
+        while (true) {
+//            screen.setOffset(camera.x, camera.y);
+
+
             screen.blit(bg, 0, 0);
-            for (int i = 0; i < OBJECTS_COUNT; i++) {
-//                screen.blit(object, (int) (Math.random() * 320), (int) (Math.random() * 200));
-                screen.blit(object, i * 10, i * 10);
-            }
+            screen.blit(object, x, y);
+
+
+//            for (int i = 0; i < OBJECTS_COUNT; i++) {
+////                screen.blit(object, (int) (Math.random() * 320), (int) (Math.random() * 200));
+//                screen.blit(object, i * 10, i * 10);
+//            }
             screen.setOffset(0, 0);
             screen.write(font, 0, 0, "" + fps);
             screen.render();

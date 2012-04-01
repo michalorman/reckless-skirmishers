@@ -15,12 +15,10 @@ public class Keyboard extends EventQueue<KeyEvent> implements KeyListener {
 
     @Override
     protected void processEvent(KeyEvent event) {
-
         switch (event.getID()) {
             case KeyEvent.KEY_PRESSED:
             case KeyEvent.KEY_RELEASED:
                 toggleKey(event.getKeyCode());
-
         }
     }
 
