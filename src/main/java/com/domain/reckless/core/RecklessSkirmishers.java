@@ -5,6 +5,7 @@ import com.domain.reckless.core.setting.Settings;
 import com.domain.reckless.game.FixedLengthGameLoop;
 import com.domain.reckless.game.GameLoop;
 import com.domain.reckless.graphics.DefaultScreen;
+import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.i18n.I18n;
 import com.domain.reckless.i18n.PropertiesI18n;
 import org.slf4j.Logger;
@@ -69,7 +70,7 @@ public class RecklessSkirmishers {
 
         try {
             I18n i18n = new PropertiesI18n(settings);
-            DefaultScreen screen = new DefaultScreen.Builder(settings.getSettingAsInt(Settings.Setting.SCREEN_WIDTH),
+            Screen screen = new DefaultScreen.Builder(settings.getSettingAsInt(Settings.Setting.SCREEN_WIDTH),
                     settings.getSettingAsInt(Settings.Setting.SCREEN_HEIGHT))
                     .scale(2.0)
                     .title(i18n.t("game.ui.title"))
