@@ -1,4 +1,4 @@
-package com.domain.reckless.graphics.common;
+package com.domain.reckless.graphics;
 
 public class RGB {
     public int r, g, b;
