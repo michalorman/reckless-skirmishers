@@ -1,14 +1,17 @@
 package com.domain.reckless.world;
 
 import com.domain.reckless.graphics.Screen;
+import com.domain.reckless.res.Assets;
 
 public class Player extends GameObject {
     @Override
     public void render(Screen screen) {
-        for (double ix = pos.x; ix < pos.x + 10; ix++) {
-            for (double iy = pos.y; iy < pos.y + 10; iy++) {
-                screen.putPixel((int) ix, (int) iy, 0);
-            }
-        }
+        screen.blit(Assets.Bitmaps.player[0][0], (int) pos.x, (int) pos.y);
+    }
+
+    @Override
+    public void update() {
+        pos.x += (Math.random() * 3) - 1;
+        pos.y += (Math.random() * 3) - 1;
     }
 }

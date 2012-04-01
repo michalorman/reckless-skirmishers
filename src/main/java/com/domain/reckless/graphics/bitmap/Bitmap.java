@@ -104,7 +104,7 @@ public class Bitmap {
 
     public static Bitmap load(String filename) {
         try {
-            BufferedImage bi = ImageIO.read(new File(filename));
+            BufferedImage bi = readFile(filename);
             int biWidth = bi.getWidth();
             int biHeight = bi.getHeight();
             Bitmap bitmap = new Bitmap(biWidth, biHeight);
@@ -115,9 +115,13 @@ public class Bitmap {
         }
     }
 
+    private static BufferedImage readFile(String filename) throws IOException {
+        return ImageIO.read(String.class.getResourceAsStream(filename));
+    }
+
     public static Bitmap loadTile(String filename, int tileX, int tileY, int tileW, int tileH) {
         try {
-            BufferedImage bi = ImageIO.read(new File(filename));
+            BufferedImage bi = readFile(filename);
             Bitmap bitmap = new Bitmap(tileW, tileH);
             bi.getRGB(tileX * tileW, tileY * tileH, tileW, tileH, bitmap.pixels, 0, tileW);
             return bitmap;

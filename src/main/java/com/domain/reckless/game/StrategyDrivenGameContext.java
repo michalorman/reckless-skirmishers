@@ -42,7 +42,7 @@ public class StrategyDrivenGameContext implements GameContext {
 
     @Override
     public void update() {
-        updateStrategy.update(this);
+        updateStrategy.update(objects);
     }
 
     @Override

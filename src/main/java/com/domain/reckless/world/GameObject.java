@@ -3,7 +3,7 @@ package com.domain.reckless.world;
 import com.domain.reckless.math.Vect2D;
 
 public abstract class GameObject
-        implements Comparable<GameObject>, Renderable {
+        implements Comparable<GameObject>, Renderable, Updateable {
 
     public Vect2D pos;
 
