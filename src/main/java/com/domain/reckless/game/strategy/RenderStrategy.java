@@ -1,7 +1,9 @@
 package com.domain.reckless.game.strategy;
 
-import com.domain.reckless.game.GameContext;
+import com.domain.reckless.world.Renderable;
+
+import java.util.Set;
 
 public interface RenderStrategy {
-    void render(GameContext context);
+    void render(Set<? extends Renderable> renderables);
 }
