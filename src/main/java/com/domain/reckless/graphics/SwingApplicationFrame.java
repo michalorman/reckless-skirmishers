@@ -14,6 +14,11 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
     private DefaultScreen screen;
 
     public SwingApplicationFrame(Builder builder) {
+        initGraphics(builder);
+        initKeyboard();
+    }
+
+    private void initGraphics(Builder builder) {
         scale = builder.scale;
         int w = (int) (builder.w * scale);
         int h = (int) (builder.h * scale);
@@ -31,13 +36,20 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
         Canvas canvas = new Canvas();
         canvas.setBounds(0, 0, w, h);
         canvas.setIgnoreRepaint(true);
+        canvas.setFocusable(false);
         panel.add(canvas);
+        panel.setFocusable(false);
         //We have canvas in panel, so now we can create buffers.
         canvas.createBufferStrategy(2);
         bufferStrategy = canvas.getBufferStrategy();
-        canvas.requestFocus();
         canvas.setBackground(Color.black);
         pack();
+    }
+
+    private void initKeyboard() {
+        keyboard = new Keyboard();
+        addKeyListener(keyboard);
+        requestFocus();
     }
 
     public void render() {

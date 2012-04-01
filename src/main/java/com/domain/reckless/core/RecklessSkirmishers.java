@@ -83,14 +83,7 @@ public class RecklessSkirmishers {
                     .title(i18n.t("game.ui.title"))
                     .build();
             Screen screen = frameContext.getScreen();
-/*
-            Screen screen = new DefaultScreen.Builder(settings.getSettingAsInt(Settings.Setting.SCREEN_WIDTH),
-                    settings.getSettingAsInt(Settings.Setting.SCREEN_HEIGHT))
-                    .scale(2.0)
-                    .title(i18n.t("game.ui.title"))
-                    .build();
 
-*/
             GameContext context = new StrategyDrivenGameContext(
                     new DefaultUpdateStrategy(),
                     new DefaultRenderStrategy(screen)
