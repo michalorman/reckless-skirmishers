@@ -28,15 +28,16 @@ public class BitmapFont {
             Character ch = str.charAt(i);
             Bitmap letter = characters.get(ch);
             if (letter != null) {
-                bitmap.blit(letter, i * letter.getWidth() + spacing, y);
+                bitmap.blit(letter, x + (i * letter.getWidth()) + spacing, y);
             }
         }
     }
 
     public static BitmapFont load(String filename, String letters, int letterW, int letterH) {
+        int index = 0;
         Bitmap[][] bitmaps = Bitmap.loadTiles(filename, letterW, letterH);
         BitmapFont bitmapFont = new BitmapFont();
-        int index = 0;
+        //Could use for each loop, but this provides better readability.
         for (int row = 0; row < bitmaps.length; row++) {
             for (int col = 0; col < bitmaps[row].length; col++) {
                 bitmapFont.characters.put(letters.charAt(index), bitmaps[row][col]);
