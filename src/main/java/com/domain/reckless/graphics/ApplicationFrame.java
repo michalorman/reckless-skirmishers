@@ -9,23 +9,20 @@ import java.awt.image.BufferStrategy;
 public class ApplicationFrame extends JFrame {
     private ImageBitmap imageBitmap;
     private BufferStrategy bufferStrategy;
-    private JPanel panel;
-    private int w, h;
     private double scale;
 
     public ApplicationFrame(Builder builder) {
         scale = builder.scale;
-        w = (int) (builder.w * scale);
-        h = (int) (builder.h * scale);
+        int w = (int) (builder.w * scale);
+        int h = (int) (builder.h * scale);
         imageBitmap = builder.imageBitmap;
         //Basic initialization
         setTitle(builder.title);
         setResizable(builder.resizable);
         setSize(new Dimension(w, h));
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //
-        panel = (JPanel) getContentPane();
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JPanel panel = (JPanel) getContentPane();
         panel.setPreferredSize(new Dimension(w, h));
         panel.setLayout(null);
         //Get drawing objects

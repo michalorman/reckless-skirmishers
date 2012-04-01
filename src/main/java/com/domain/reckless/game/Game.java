@@ -1,6 +1,6 @@
 package com.domain.reckless.game;
 
-import com.domain.reckless.graphics.FrameScreen;
+import com.domain.reckless.graphics.DefaultScreen;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.graphics.font.BitmapFont;
 
@@ -10,7 +10,7 @@ import java.util.TimerTask;
 
 public class Game implements Runnable {
     private final static int OBJECTS_COUNT = 3000;
-    private FrameScreen screen;
+    private DefaultScreen screen;
     private Bitmap object;
     private Bitmap bg;
     private BitmapFont font;
@@ -20,7 +20,7 @@ public class Game implements Runnable {
     int fps = 0;
 
     public Game() {
-        screen = new FrameScreen.Builder(320, 200).scale(2.0).title("Reckless Skirmishers").build();
+        screen = new DefaultScreen.Builder(320, 200).scale(2.0).title("Reckless Skirmishers").build();
         object = Bitmap.loadTile("d:/stuff//slave.png", 1, 1, 32, 32);
         bg = Bitmap.load("d:/stuff/bg.png");
 
