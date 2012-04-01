@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class DefaultRenderStrategy implements RenderStrategy {
     private Screen screen;
+    private double lastRenderTime = 0;
 
     public DefaultRenderStrategy(Screen screen) {
         this.screen = screen;
@@ -20,7 +21,9 @@ public class DefaultRenderStrategy implements RenderStrategy {
             renderable.render(screen);
         }
         screen.write(Assets.Fonts.font, 5, 5, fps + " FPS");
-        screen.write(Assets.Fonts.font, 400, 5, renderables.size() + " OBJECTS");
+        screen.write(Assets.Fonts.font, 250, 5, String.format("%d OBJECT RENDERED IN %.2f MS", renderables.size(), lastRenderTime));
+        double start = System.currentTimeMillis();
         screen.render();
+        lastRenderTime = System.currentTimeMillis() - start;
     }
 }
