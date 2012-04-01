@@ -1,6 +1,6 @@
 package com.domain.reckless.graphics.utils;
 
-import com.domain.reckless.graphics.common.RGB;
+import com.domain.reckless.graphics.RGB;
 
 public class PixelUtils {
 

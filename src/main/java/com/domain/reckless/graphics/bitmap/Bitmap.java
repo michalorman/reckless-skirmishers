@@ -1,11 +1,10 @@
 package com.domain.reckless.graphics.bitmap;
 
-import com.domain.reckless.graphics.common.Rect;
+import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.graphics.font.BitmapFont;
 import com.domain.reckless.graphics.utils.PixelUtils;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +46,7 @@ public class Bitmap {
     }
 
     public void blit(Bitmap bitmap, int x, int y) {
-        Rect blitArea = new Rect(x, y, x + bitmap.w, y + bitmap.h);
+        Rectangle blitArea = new Rectangle(x, y, x + bitmap.w, y + bitmap.h);
         adjustBlitArea(blitArea);
         int blitWidth = blitArea.x2 - blitArea.x1;
         for (int yy = blitArea.y1; yy < blitArea.y2; yy++) {
@@ -68,7 +67,7 @@ public class Bitmap {
     }
 
     public Bitmap cut(int x, int y, int w, int h) {
-        Rectangle toBeCutArea = new Rectangle(x, y, w, h);
+        Rectangle toBeCutArea = new Rectangle(x, y, x + w, y + h);
         Rectangle wholeArea = new Rectangle(0, 0, this.w, this.h);
         Rectangle cutArea = wholeArea.intersection(toBeCutArea);
         Bitmap bitmap = new Bitmap(cutArea.width, cutArea.height);
@@ -87,7 +86,7 @@ public class Bitmap {
         return x >= 0 && x < w && y >= 0 && y < h;
     }
 
-    private Rect adjustBlitArea(Rect blitArea) {
+    private Rectangle adjustBlitArea(Rectangle blitArea) {
         if (blitArea.x1 < 0) blitArea.x1 = 0;
         if (blitArea.y1 < 0) blitArea.y1 = 0;
         if (blitArea.x2 > w) blitArea.x2 = w;

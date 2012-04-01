@@ -11,6 +11,7 @@ import java.awt.image.BufferStrategy;
     screen.putPixel(100, 100, 0xff00ff);
     !!! Remember to invoke screen.render() in the main loop.
  */
+@Deprecated
 public class DefaultScreen extends ImageBitmap implements Screen {
     protected JFrame frame;
     protected JPanel panel;
@@ -19,6 +20,7 @@ public class DefaultScreen extends ImageBitmap implements Screen {
     protected final String title;
     protected final int frameW;
     protected final int frameH;
+    protected int xOffset, yOffset;
 
     private DefaultScreen(Builder builder) {
         super(builder.w, builder.h);
@@ -29,6 +31,11 @@ public class DefaultScreen extends ImageBitmap implements Screen {
         initFrame();
         initPanel();
         initCanvas();
+    }
+
+    public void setOffset(int xOffset, int yOffset) {
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
     }
 
     private void initFrame() {
