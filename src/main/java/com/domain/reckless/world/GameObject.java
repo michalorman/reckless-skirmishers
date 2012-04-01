@@ -9,6 +9,8 @@ public abstract class GameObject
 
     public Vect2D delta;
 
+    public int facing = 4;
+
     /*
      * By pos.y coordinate in descending order.
      */

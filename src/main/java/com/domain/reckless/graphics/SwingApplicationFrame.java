@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-public class SwingApplicationFrame extends JFrame implements FrameContext {
+    public class SwingApplicationFrame extends JFrame implements FrameContext {
     private BufferStrategy bufferStrategy;
     private double scale;
     //Context

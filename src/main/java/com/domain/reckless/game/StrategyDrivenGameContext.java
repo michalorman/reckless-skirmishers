@@ -30,12 +30,10 @@ public class StrategyDrivenGameContext implements GameContext {
         this.renderStrategy = renderStrategy;
 
         // TODO: test objects
-        for (int i = 0; i < 500; i++) {
-            Player player = new Player();
-            player.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
-            player.delta = new Vect2D(Math.random() * 3, Math.random() * 3);
-            objects.add(player);
-        }
+        Player player = new Player();
+        player.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
+        player.delta = new Vect2D(3, 3);
+        objects.add(player);
     }
 
     @Override

@@ -82,11 +82,10 @@ public class RecklessSkirmishers {
                     .scale(2.0)
                     .title(i18n.t("game.ui.title"))
                     .build();
-            Screen screen = frameContext.getScreen();
 
             GameContext context = new StrategyDrivenGameContext(
-                    new DefaultUpdateStrategy(),
-                    new DefaultRenderStrategy(screen)
+                    new DefaultUpdateStrategy(frameContext.getKeyboard()),
+                    new DefaultRenderStrategy(frameContext.getScreen())
             );
 
             GameLoop gameLoop = new FixedLengthGameLoop(context);
