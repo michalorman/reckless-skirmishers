@@ -7,7 +7,7 @@ public abstract class EventQueue<E> {
     private List<E> events = new LinkedList<>();
     private List<E> eventQueue = new LinkedList<>();
 
-    protected synchronized void update() {
+    public synchronized void update() {
         for (E event : events) {
             processEvent(event);
         }
