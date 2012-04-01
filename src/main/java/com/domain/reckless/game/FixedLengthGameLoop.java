@@ -1,15 +1,10 @@
 package com.domain.reckless.game;
 
-import com.domain.reckless.graphics.Screen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FixedLengthGameLoop implements GameLoop {
     private static final Logger LOGGER = LoggerFactory.getLogger(FixedLengthGameLoop.class);
-
-    private Screen screen;
-
-    private boolean isRunning = true;
 
     // Limits the update amounts before render
     private static final int MAX_UPDATES_PER_RENDER = Integer.MAX_VALUE;
@@ -26,9 +21,11 @@ public class FixedLengthGameLoop implements GameLoop {
     // time between each render
     private static final double RENDERS_INTERVAL = 1000000000 / FRAMES_RATE;
 
-    public FixedLengthGameLoop(Screen screen) {
+    private GameContext context;
+
+    public FixedLengthGameLoop(GameContext context) {
         LOGGER.info("Initializing default game loop");
-        this.screen = screen;
+        this.context = context;
     }
 
     public void run() {
@@ -40,19 +37,19 @@ public class FixedLengthGameLoop implements GameLoop {
         double now;
         int updatesCount;
 
-        while (isRunning) {
+        while (context.isRunning()) {
             now = System.nanoTime();
             updatesCount = 0;
 
             while (now - lastUpdateTime > UPDATES_INTERVAL && updatesCount < MAX_UPDATES_PER_RENDER) {
-                // TODO: add game update here
+                context.update();
                 lastUpdateTime += UPDATES_INTERVAL;
                 ++updatesCount;
             }
 
             if (now - lastRenderTime > RENDERS_INTERVAL) {
                 float delta = Math.min(1.0f, (float) ((now - lastUpdateTime) / UPDATES_INTERVAL));
-                // TODO: add render here
+                context.render(delta);
                 lastRenderTime = now;
             }
 

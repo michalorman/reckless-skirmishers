@@ -8,9 +8,6 @@ repositories {
     mavenCentral()
 }
 
-sourceSets.main.resources.srcDirs =
-    ['src/main/resources', 'src/main/images', 'src/main/sound', 'src/main/locales']
-
 dependencies {
     compile 'ch.qos.logback:logback-classic:1.0.1'
     compile 'org.slf4j:slf4j-api:1.6.4'
