@@ -2,20 +2,21 @@ package com.domain.reckless.graphics.font;
 
 import com.domain.reckless.graphics.bitmap.Bitmap;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class BitmapFont {
     public static final int DEFAULT_FONT_SPACING = 2;
     //TODO check performance, swap to array if necessary.
-    private Map<Character, Bitmap> characters;
+    private Map<Character, BitmapCharacter> characters;
 
     public BitmapFont() {
-        characters = new HashMap<>();
+        characters = new TreeMap<>();
     }
 
     public void addCharacter(char character, Bitmap bitmap) {
-        characters.put(character, bitmap);
+        BitmapCharacter bitmapCharacter = new BitmapCharacter(character, bitmap);
+        characters.put(character, bitmapCharacter);
     }
 
     public void write(Bitmap bitmap, int x, int y, String str) {
@@ -26,9 +27,9 @@ public class BitmapFont {
         int stringLength = str.length();
         for (int i = 0; i < stringLength; i++) {
             Character ch = str.charAt(i);
-            Bitmap letter = characters.get(ch);
-            if (letter != null) {
-                bitmap.blit(letter, x + (i * letter.getWidth()) + spacing, y);
+            BitmapCharacter bitmapCharacter = characters.get(ch);
+            if (bitmapCharacter != null) {
+                bitmap.blit(bitmapCharacter.bitmap, x + (i * bitmapCharacter.bitmap.getWidth()) + spacing, y);
             }
         }
     }
@@ -40,10 +41,24 @@ public class BitmapFont {
         //Could use for each loop, but this provides better readability.
         for (int row = 0; row < bitmaps.length; row++) {
             for (int col = 0; col < bitmaps[row].length; col++) {
-                bitmapFont.characters.put(letters.charAt(index), bitmaps[row][col]);
+                bitmapFont.addCharacter(letters.charAt(index), bitmaps[row][col]);
                 index++;
             }
         }
         return bitmapFont;
+    }
+}
+
+class BitmapCharacter implements Comparable<BitmapCharacter> {
+    char character;
+    Bitmap bitmap;
+
+    public BitmapCharacter(char character, Bitmap bitmap) {
+        this.character = character;
+        this.bitmap = bitmap;
+    }
+
+    public int compareTo(BitmapCharacter bitmapCharacter) {
+        return character - bitmapCharacter.character;
     }
 }
