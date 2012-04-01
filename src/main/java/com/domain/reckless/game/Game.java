@@ -36,6 +36,10 @@ public class Game implements Runnable {
         Timer cameraTimer = new Timer();
         cameraTimer.schedule(new CameraMove(camera, -1.0, -1.0), 0, 10);
         while (true) {
+            screen.blit(bg, 0, 0);
+            screen.putPixel(100, 100, 0xffffff);
+            screen.render();
+            /*
             screen.setOffset(camera.x, camera.y);
             screen.blit(bg, 0, 0);
             for (int i = 0; i < OBJECTS_COUNT; i++) {
@@ -46,6 +50,7 @@ public class Game implements Runnable {
             screen.write(font, 0, 0, "" + fps);
             screen.render();
             frames++;
+            */
         }
     }
 }

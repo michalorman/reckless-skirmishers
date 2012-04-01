@@ -8,6 +8,7 @@ import com.domain.reckless.game.GameLoop;
 import com.domain.reckless.game.StrategyDrivenGameContext;
 import com.domain.reckless.game.strategy.DefaultRenderStrategy;
 import com.domain.reckless.game.strategy.DefaultUpdateStrategy;
+import com.domain.reckless.graphics.DefaultScreen;
 import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.i18n.I18n;
 import com.domain.reckless.i18n.PropertiesI18n;

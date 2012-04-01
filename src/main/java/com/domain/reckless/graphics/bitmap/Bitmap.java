@@ -27,7 +27,7 @@ public class Bitmap {
 
     public void putPixel(int x, int y, int col) {
         if (isValidPosition(x, y)) {
-            pixels[y * w + x] = col;
+            pixels[y * w + x] = 0xff000000 | col;
         }
     }
 
