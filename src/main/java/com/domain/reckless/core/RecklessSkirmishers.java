@@ -3,7 +3,11 @@ package com.domain.reckless.core;
 import com.domain.reckless.core.setting.InMemorySettings;
 import com.domain.reckless.core.setting.Settings;
 import com.domain.reckless.game.FixedLengthGameLoop;
+import com.domain.reckless.game.GameContext;
 import com.domain.reckless.game.GameLoop;
+import com.domain.reckless.game.StrategyDrivenGameContext;
+import com.domain.reckless.game.strategy.DefaultRenderStrategy;
+import com.domain.reckless.game.strategy.DefaultUpdateStrategy;
 import com.domain.reckless.graphics.DefaultScreen;
 import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.i18n.I18n;
@@ -70,12 +74,19 @@ public class RecklessSkirmishers {
 
         try {
             I18n i18n = new PropertiesI18n(settings);
+
             Screen screen = new DefaultScreen.Builder(settings.getSettingAsInt(Settings.Setting.SCREEN_WIDTH),
                     settings.getSettingAsInt(Settings.Setting.SCREEN_HEIGHT))
                     .scale(2.0)
                     .title(i18n.t("game.ui.title"))
                     .build();
-            GameLoop gameLoop = new FixedLengthGameLoop(screen);
+
+            GameContext context = new StrategyDrivenGameContext(
+                    new DefaultUpdateStrategy(),
+                    new DefaultRenderStrategy(screen)
+            );
+
+            GameLoop gameLoop = new FixedLengthGameLoop(context);
             Thread thread = new Thread(gameLoop);
             thread.start();
         } catch (IOException e) {
