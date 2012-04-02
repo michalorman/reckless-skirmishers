@@ -17,6 +17,7 @@ public abstract class GameObject
         this.ai = ai;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void update(GameContext context) {
         ai.nextMove(this, context);
