@@ -14,7 +14,7 @@ public class RandomDestAI implements AI {
         }
 
         // move towards destination
-        if (Math.abs(enemy.dest.x - enemy.pos.x) > enemy.delta.x &&
+        if (Math.abs(enemy.dest.x - enemy.pos.x) > enemy.delta.x ||
                 Math.abs(enemy.dest.y - enemy.pos.y) > enemy.delta.y) {
             // TODO: add better movement
             if (enemy.pos.x < enemy.dest.x)
