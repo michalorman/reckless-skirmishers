@@ -13,7 +13,6 @@ public abstract class EventQueue<E> {
         }
         events = eventQueue;
         eventQueue = new LinkedList<>();
-        System.out.println(events.size());
     }
 
     protected abstract void processEvent(E event);
