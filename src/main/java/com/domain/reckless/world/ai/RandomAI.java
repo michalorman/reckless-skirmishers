@@ -5,7 +5,7 @@ import com.domain.reckless.world.Enemy;
 // Moves randomly
 public class RandomAI implements AI {
     @Override
-    public void move(Enemy enemy) {
+    public void nextMove(Enemy enemy) {
         enemy.pos.x += sign() * enemy.delta.x;
         enemy.pos.y += sign() * enemy.delta.y;
     }

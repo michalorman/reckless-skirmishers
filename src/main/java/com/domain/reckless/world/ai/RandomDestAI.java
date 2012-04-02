@@ -7,7 +7,7 @@ import com.domain.reckless.world.Enemy;
 // is reached picks another point.
 public class RandomDestAI implements AI {
     @Override
-    public void move(Enemy enemy) {
+    public void nextMove(Enemy enemy) {
         if (enemy.dest == null) {
             // pick new destination
             enemy.dest = new Vect2D(Math.random() * 500, Math.random() * 380);
@@ -17,14 +17,22 @@ public class RandomDestAI implements AI {
         if (Math.abs(enemy.dest.x - enemy.pos.x) > enemy.delta.x ||
                 Math.abs(enemy.dest.y - enemy.pos.y) > enemy.delta.y) {
             // TODO: add better movement
-            if (enemy.pos.x < enemy.dest.x)
+            if (enemy.pos.x < enemy.dest.x - enemy.delta.x) {
                 enemy.pos.x += enemy.delta.x;
-            if (enemy.pos.x > enemy.dest.x)
+                enemy.facing = 2;
+            }
+            if (enemy.pos.x > enemy.dest.x + enemy.delta.x) {
                 enemy.pos.x -= enemy.delta.x;
-            if (enemy.pos.y < enemy.dest.y)
+                enemy.facing = 0;
+            }
+            if (enemy.pos.y < enemy.dest.y - enemy.delta.y) {
                 enemy.pos.y += enemy.delta.y;
-            if (enemy.pos.y > enemy.dest.y)
+                enemy.facing = 3;
+            }
+            if (enemy.pos.y > enemy.dest.y + enemy.delta.x) {
                 enemy.pos.y -= enemy.delta.y;
+                enemy.facing = 1;
+            }
         } else {
             enemy.dest = null;
         }

@@ -6,11 +6,6 @@ import com.domain.reckless.world.ai.AI;
 
 public class Mummy extends Enemy {
     public Mummy(AI ai) {
-        super(ai);
-    }
-
-    @Override
-    public void render(Screen screen) {
-        screen.blit(Assets.Bitmaps.mummy[3][0], (int) pos.x, (int) pos.y);
+        super(ai, Assets.Bitmaps.mummy);
     }
 }
