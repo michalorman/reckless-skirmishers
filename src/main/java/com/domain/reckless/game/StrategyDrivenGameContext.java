@@ -50,7 +50,7 @@ public class StrategyDrivenGameContext implements GameContext {
             objects.add(enemy);
         }
         for (int i = 0; i < 15 + Math.random() * 50; i++) {
-            Enemy enemy = new Enemy(destAI, Assets.Bitmaps.mummy, new FixedDurationAnimation(200, 4));
+            Enemy enemy = new Enemy(destAI, Assets.Bitmaps.mummy, new FixedDurationAnimation(200, 4, true));
             enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
             enemy.delta = new Vect2D(0.5 + Math.random(), 0.5 + Math.random());
             objects.add(enemy);
