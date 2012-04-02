@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-    public class SwingApplicationFrame extends JFrame implements FrameContext {
+public class SwingApplicationFrame extends JFrame implements FrameContext {
     private BufferStrategy bufferStrategy;
     private double scale;
     //Context
@@ -25,7 +25,7 @@ import java.awt.image.BufferStrategy;
         screen = new DefaultScreen(builder.w, builder.h, this);
         //Basic initialization
         setTitle(builder.title);
-        setResizable(builder.resizable);
+        setResizable(builder.resizeable);
         setSize(new Dimension(w, h));
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -36,8 +36,10 @@ import java.awt.image.BufferStrategy;
         Canvas canvas = new Canvas();
         canvas.setBounds(0, 0, w, h);
         canvas.setIgnoreRepaint(true);
+        //It shouldn't be focusable if we want proper keyboard handling.
         canvas.setFocusable(false);
         panel.add(canvas);
+        //It shouldn't be focusable if we want proper keyboard handling.
         panel.setFocusable(false);
         //We have canvas in panel, so now we can create buffers.
         canvas.createBufferStrategy(2);
@@ -53,11 +55,14 @@ import java.awt.image.BufferStrategy;
     }
 
     public void render() {
-        Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-        g.clearRect(0, 0, screen.getWidth(), screen.getHeight());
-        g.scale(scale, scale);
-        g.drawImage(screen.getImage(), 0, 0, screen.getWidth(), screen.getHeight(), null);
-        g.dispose();
+        do {
+            do {
+                Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+                g.scale(scale, scale);
+                g.drawImage(screen.getImage(), 0, 0, screen.getWidth(), screen.getHeight(), null);
+                g.dispose();
+            } while (bufferStrategy.contentsRestored());
+        } while (bufferStrategy.contentsLost());
         bufferStrategy.show();
     }
 
@@ -73,7 +78,7 @@ import java.awt.image.BufferStrategy;
         private final int w;
         private final int h;
         private double scale = 1.0;
-        private boolean resizable = false;
+        private boolean resizeable = false;
         private String title;
 
         public Builder(int w, int h) {
@@ -91,8 +96,8 @@ import java.awt.image.BufferStrategy;
             return this;
         }
 
-        public Builder resizable(boolean resizable) {
-            this.resizable = resizable;
+        public Builder resizeable(boolean resizable) {
+            this.resizeable = resizable;
             return this;
         }
 
