@@ -1,8 +1,11 @@
 package com.domain.reckless.game;
 
+import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.game.strategy.RenderStrategy;
 import com.domain.reckless.game.strategy.UpdateStrategy;
+import com.domain.reckless.graphics.FrameContext;
 import com.domain.reckless.math.Vect2D;
+import com.domain.reckless.res.Assets;
 import com.domain.reckless.world.*;
 import com.domain.reckless.world.ai.AI;
 import com.domain.reckless.world.ai.RandomAI;
@@ -27,8 +30,11 @@ public class StrategyDrivenGameContext implements GameContext {
 
     private Collection<GameObject> objects = new ArrayList<>();
 
-    public StrategyDrivenGameContext(UpdateStrategy updateStrategy, RenderStrategy renderStrategy) {
+    private FrameContext frameContext;
+
+    public StrategyDrivenGameContext(FrameContext frameContext, UpdateStrategy updateStrategy, RenderStrategy renderStrategy) {
         LOGGER.info("Creating strategy driven game context");
+        this.frameContext = frameContext;
         this.updateStrategy = updateStrategy;
         this.renderStrategy = renderStrategy;
 
@@ -37,15 +43,15 @@ public class StrategyDrivenGameContext implements GameContext {
 
         // TODO: test objects
         for (int i = 0; i < 5 + Math.random() * 10; i++) {
-            Enemy enemy = new Pharao(randomAI);
+            Enemy enemy = new Enemy(randomAI, Assets.Bitmaps.pharao);
             enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
             enemy.delta = new Vect2D(1, 1);
             objects.add(enemy);
         }
         for (int i = 0; i < 15 + Math.random() * 50; i++) {
-            Enemy enemy = new Mummy(destAI);
+            Enemy enemy = new Enemy(destAI, Assets.Bitmaps.mummy);
             enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
-            enemy.delta = new Vect2D(1, 1);
+            enemy.delta = new Vect2D(0.5 + Math.random(), 0.5 + Math.random());
             objects.add(enemy);
         }
         Player player = new Player();
@@ -61,11 +67,16 @@ public class StrategyDrivenGameContext implements GameContext {
 
     @Override
     public void update() {
-        updateStrategy.update(objects);
+        updateStrategy.update(this, objects);
     }
 
     @Override
     public void render(float interpolation, int fps) {
-        renderStrategy.render(new TreeSet<>(objects), fps);
+        renderStrategy.render(frameContext.getScreen(), new TreeSet<>(objects), fps);
+    }
+
+    @Override
+    public Keyboard getKeyboard() {
+        return frameContext.getKeyboard();
     }
 }

@@ -1,7 +1,8 @@
 package com.domain.reckless.world.ai;
 
-import com.domain.reckless.world.Enemy;
+import com.domain.reckless.game.GameContext;
+import com.domain.reckless.world.GameObject;
 
-public interface AI {
-    void nextMove(Enemy enemy);
+public interface AI<T extends GameObject> {
+    void nextMove(T object, GameContext context);
 }

@@ -84,8 +84,9 @@ public class RecklessSkirmishers {
                     .build();
 
             GameContext context = new StrategyDrivenGameContext(
-                    new DefaultUpdateStrategy(frameContext.getKeyboard()    ),
-                    new DefaultRenderStrategy(frameContext.getScreen())
+                    frameContext,
+                    new DefaultUpdateStrategy(),
+                    new DefaultRenderStrategy()
             );
 
             GameLoop gameLoop = new FixedLengthGameLoop(context);

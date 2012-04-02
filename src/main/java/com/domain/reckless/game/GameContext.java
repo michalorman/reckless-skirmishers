@@ -1,5 +1,7 @@
 package com.domain.reckless.game;
 
+import com.domain.reckless.core.controls.Keyboard;
+
 /**
  * Single point of all information regarding the running game.
  */
@@ -24,4 +26,11 @@ public interface GameContext {
      * @param fps
      */
     void render(float interpolation, int fps);
+
+    /**
+     * Returns the keyboard handler.
+     *
+     * @return keyboard handler.
+     */
+    Keyboard getKeyboard();
 }
