@@ -8,4 +8,5 @@ public interface FrameContext {
 
     Keyboard getKeyboard();
 
+    void renderScreen();
 }

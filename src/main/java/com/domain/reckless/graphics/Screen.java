@@ -10,8 +10,6 @@ public interface Screen {
 
     void setOffset(int x, int y);
 
-    void render();
-
     void blit(Bitmap bmp, int x, int y);
 
     void write(BitmapFont font, int x, int y, String message);
