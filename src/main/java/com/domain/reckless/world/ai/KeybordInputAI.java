@@ -39,9 +39,4 @@ public class KeybordInputAI extends AbstractAI<Player> {
         }
         return delta;
     }
-
-    private boolean isMovingDiagonally(Keyboard keyboard) {
-        return (keyboard.isKeyPressed(KeyEvent.VK_LEFT) || keyboard.isKeyPressed(KeyEvent.VK_RIGHT))
-                && (keyboard.isKeyPressed(KeyEvent.VK_UP) || keyboard.isKeyPressed(KeyEvent.VK_DOWN));
-    }
 }
