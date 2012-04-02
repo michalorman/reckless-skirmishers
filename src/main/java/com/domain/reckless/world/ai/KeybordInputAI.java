@@ -2,7 +2,6 @@ package com.domain.reckless.world.ai;
 
 import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.game.GameContext;
-import com.domain.reckless.world.GameObject;
 import com.domain.reckless.world.Player;
 
 import java.awt.event.KeyEvent;

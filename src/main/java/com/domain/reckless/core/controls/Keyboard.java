@@ -15,16 +15,13 @@ public class Keyboard extends EventQueue<KeyEvent> implements KeyListener {
 
     @Override
     protected void processEvent(KeyEvent event) {
-        switch (event.getID()) {
-            case KeyEvent.KEY_PRESSED:
-            case KeyEvent.KEY_RELEASED:
-                toggleKey(event.getKeyCode());
-        }
-    }
-
-    private void toggleKey(int key) {
+        int key = event.getKeyCode();
         if (key >= 0 && key < MAX_KEY) {
-            pressed[key] = !pressed[key];
+            if (event.getID() == KeyEvent.KEY_PRESSED) {
+                pressed[key] = true;
+            } else if (event.getID() == KeyEvent.KEY_RELEASED) {
+                pressed[key] = false;
+            }
         }
     }
 
