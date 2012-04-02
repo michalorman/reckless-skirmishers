@@ -12,4 +12,8 @@ public class Vect2D {
         this.x = x;
         this.y = y;
     }
+
+    public Vect2D(Vect2D other) {
+        this(other.x, other.y);
+    }
 }
