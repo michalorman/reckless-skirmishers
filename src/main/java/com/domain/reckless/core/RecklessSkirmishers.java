@@ -69,6 +69,8 @@ public class RecklessSkirmishers {
     public static void main(String[] args) {
         LOGGER.info("Bootstraping Reckless Skirmishers...");
 
+        System.setProperty("sun.java2d.xrender", "true");
+
         Settings settings = new InMemorySettings();
 
         parseCmdArgs(args, settings);
