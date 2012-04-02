@@ -1,4 +1,4 @@
-package com.domain.reckless.level.tile;
+package com.domain.reckless.world.level.tile;
 
 import java.util.Comparator;
 import java.util.Map;

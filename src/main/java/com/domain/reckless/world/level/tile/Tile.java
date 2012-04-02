@@ -1,4 +1,4 @@
-package com.domain.reckless.level.tile;
+package com.domain.reckless.world.level.tile;
 
 public class Tile {
     int id;
