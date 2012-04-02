@@ -1,17 +1,19 @@
 package com.domain.reckless.world;
 
 import com.domain.reckless.core.controls.Keyboard;
-import com.domain.reckless.graphics.Screen;
-import com.domain.reckless.res.Assets;
+import com.domain.reckless.math.Vect2D;
+import com.domain.reckless.world.ai.AI;
 
 public abstract class Enemy extends GameObject {
-    @Override
-    public void update(Keyboard keyboard) {
-        pos.x += sign() * delta.x;
-        pos.y += sign() * delta.y;
+    public AI ai;
+    public Vect2D dest;
+
+    protected Enemy(AI ai) {
+        this.ai = ai;
     }
 
-    private int sign() {
-        return (Math.random() * 2) - 1 >= 0 ? 1 : -1;
+    @Override
+    public void update(Keyboard keyboard) {
+        ai.move(this);
     }
 }

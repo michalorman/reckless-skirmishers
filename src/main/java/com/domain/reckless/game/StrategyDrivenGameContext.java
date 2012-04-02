@@ -4,12 +4,14 @@ import com.domain.reckless.game.strategy.RenderStrategy;
 import com.domain.reckless.game.strategy.UpdateStrategy;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.world.*;
+import com.domain.reckless.world.ai.AI;
+import com.domain.reckless.world.ai.RandomAI;
+import com.domain.reckless.world.ai.RandomDestAI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -30,15 +32,18 @@ public class StrategyDrivenGameContext implements GameContext {
         this.updateStrategy = updateStrategy;
         this.renderStrategy = renderStrategy;
 
+        AI randomAI = new RandomAI();
+        AI destAI = new RandomDestAI();
+
         // TODO: test objects
         for (int i = 0; i < 5 + Math.random() * 10; i++) {
-            Enemy enemy = new Pharao();
+            Enemy enemy = new Pharao(randomAI);
             enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
             enemy.delta = new Vect2D(1, 1);
             objects.add(enemy);
         }
         for (int i = 0; i < 15 + Math.random() * 50; i++) {
-            Enemy enemy = new Mummy();
+            Enemy enemy = new Mummy(destAI);
             enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
             enemy.delta = new Vect2D(1, 1);
             objects.add(enemy);
