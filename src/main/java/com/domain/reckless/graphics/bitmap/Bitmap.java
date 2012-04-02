@@ -1,5 +1,6 @@
 package com.domain.reckless.graphics.bitmap;
 
+import com.domain.reckless.graphics.RGB;
 import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.graphics.font.BitmapFont;
 import com.domain.reckless.graphics.utils.PixelUtils;
@@ -60,6 +61,44 @@ public class Bitmap {
                 } else {
                     int bgCol = pixels[targetPixel + xx];
                     pixels[targetPixel + xx] = PixelUtils.blendColors(bgCol, col);
+                }
+            }
+        }
+    }
+
+    public void alphaBlit(Bitmap bitmap, int x, int y, int alpha) {
+        Rectangle blitArea = new Rectangle(x, y, x + bitmap.w, y + bitmap.h);
+        adjustBlitArea(blitArea);
+        int blitWidth = blitArea.x2 - blitArea.x1;
+        for (int yy = blitArea.y1; yy < blitArea.y2; yy++) {
+            int targetPixel = yy * w + blitArea.x1;
+            int sourcePixel = (yy - y) * bitmap.w + (blitArea.x1 - x);
+            targetPixel -= sourcePixel;
+            for (int xx = sourcePixel; xx < sourcePixel + blitWidth; xx++) {
+                RGB rgb = new RGB(bitmap.pixels[xx]);
+                if (rgb.alpha > 0) {
+                    int col = (alpha << 24) | rgb.r | rgb.g | rgb.b;
+                    int bgCol = pixels[targetPixel + xx];
+                    pixels[targetPixel + xx] = PixelUtils.blendColors(bgCol, col);
+                }
+            }
+        }
+    }
+
+    //TODO Fix blending colors.
+    public void colorBlit(Bitmap bitmap, int x, int y, int color) {
+        Rectangle blitArea = new Rectangle(x, y, x + bitmap.w, y + bitmap.h);
+        adjustBlitArea(blitArea);
+        int blitWidth = blitArea.x2 - blitArea.x1;
+        for (int yy = blitArea.y1; yy < blitArea.y2; yy++) {
+            int targetPixel = yy * w + blitArea.x1;
+            int sourcePixel = (yy - y) * bitmap.w + (blitArea.x1 - x);
+            targetPixel -= sourcePixel;
+            for (int xx = sourcePixel; xx < sourcePixel + blitWidth; xx++) {
+                int col = bitmap.pixels[xx];
+                RGB rgb = new RGB(bitmap.pixels[xx]);
+                if (rgb.alpha > 0) {//alpha > 0
+                    pixels[targetPixel + xx] = PixelUtils.blendColors(color, col);
                 }
             }
         }

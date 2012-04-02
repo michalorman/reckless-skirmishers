@@ -18,6 +18,16 @@ public class DefaultScreen extends ImageBitmap implements Screen {
     }
 
     @Override
+    public void alphaBlit(Bitmap bmp, int x, int y, int alpha) {
+        super.alphaBlit(bmp, x, y, alpha);
+    }
+
+    @Override
+    public void colorBlit(Bitmap bmp, int x, int y, int color) {
+        super.colorBlit(bmp, x, y, color);
+    }
+
+    @Override
     public void setOffset(int x, int y) {
         xOffset = x;
         yOffset = y;
