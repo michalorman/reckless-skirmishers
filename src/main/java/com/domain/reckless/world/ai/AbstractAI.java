@@ -24,5 +24,14 @@ public abstract class AbstractAI<T extends GameObject> implements AI<T> {
         object.pos.y += delta.y;
     }
 
+    /**
+     * Delegates exact movement to subclass. Subclass instead of modifying object's position
+     * directly should should return deltas for current object position. This deltas are examined
+     * to check for diagonal movements and adjusted accordingly in this case.
+     *
+     * @param object  The object being moved.
+     * @param context The game context.
+     * @return Delta to current object position.
+     */
     protected abstract Vect2D doNextMove(T object, GameContext context);
 }
