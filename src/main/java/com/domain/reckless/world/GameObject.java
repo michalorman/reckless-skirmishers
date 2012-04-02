@@ -4,7 +4,6 @@ import com.domain.reckless.game.GameContext;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.world.ai.AI;
 import com.domain.reckless.world.anim.Animation;
-import com.domain.reckless.world.anim.FixedDurationAnimation;
 
 public abstract class GameObject
         implements Comparable<GameObject>, Renderable, Updateable {
@@ -15,7 +14,6 @@ public abstract class GameObject
     public int facing = 4;
     public AI ai;
     public Animation animation;
-    public long lastAnimAt;
 
     protected GameObject(AI ai, Animation animation) {
         this.ai = ai;

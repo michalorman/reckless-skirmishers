@@ -12,18 +12,27 @@ public class FixedDurationAnimation implements Animation {
 
     public int curFrame;
 
+    public long lastAnimAt;
+
     public FixedDurationAnimation(long duration, int framesNo) {
+        this(duration, framesNo, false);
+    }
+
+    public FixedDurationAnimation(long duration, int framesNo, boolean startRandomly) {
         this.duration = duration;
         this.framesNo = framesNo;
+        if (startRandomly) {
+            curFrame = (int) (Math.random() * framesNo);
+        }
     }
 
     @Override
     public int nextFrameIndex(GameObject object) {
         long now = System.currentTimeMillis();
 
-        if (now - object.lastAnimAt > duration) {
+        if (now - lastAnimAt > duration) {
             curFrame = curFrame + 1 >= framesNo ? 0 : curFrame + 1;
-            object.lastAnimAt = now;
+            lastAnimAt = now;
         }
 
         return curFrame;
