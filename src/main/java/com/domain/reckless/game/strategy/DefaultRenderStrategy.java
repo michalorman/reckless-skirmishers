@@ -2,6 +2,7 @@ package com.domain.reckless.game.strategy;
 
 import com.domain.reckless.game.GameContext;
 import com.domain.reckless.graphics.Screen;
+import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.res.Assets;
 import com.domain.reckless.world.Renderable;
 
@@ -22,7 +23,9 @@ public class DefaultRenderStrategy implements RenderStrategy {
     public void render(GameContext context, int fps) {
         Screen screen = context.getScreen();
 
-        screen.blit(context.getLevel().bitmap, 0, 0);
+        Bitmap bitmap = context.getLevelBitmap();
+
+        screen.blit(bitmap, 0, 0);
 
         for (Renderable renderable : context.getGameObjects()) {
             renderable.render(screen);

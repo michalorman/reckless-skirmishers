@@ -9,4 +9,8 @@ public interface FrameContext {
     Keyboard getKeyboard();
 
     void renderScreen();
+
+    int getScreenW();
+
+    int getScreenH();
 }

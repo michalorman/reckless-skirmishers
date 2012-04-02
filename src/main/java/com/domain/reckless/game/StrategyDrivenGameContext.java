@@ -39,6 +39,8 @@ public class StrategyDrivenGameContext implements GameContext {
 
     private FrameContext frameContext;
 
+    private Player player;
+
     public StrategyDrivenGameContext(FrameContext frameContext, UpdateStrategy updateStrategy, RenderStrategy renderStrategy) {
         LOGGER.info("Creating strategy driven game context");
         this.frameContext = frameContext;
@@ -63,7 +65,7 @@ public class StrategyDrivenGameContext implements GameContext {
             objects.add(enemy);
         }
 
-        Player player = new Player();
+        player = new Player();
         player.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
         player.delta = new Vect2D(3, 3);
         objects.add(player);
@@ -105,12 +107,12 @@ public class StrategyDrivenGameContext implements GameContext {
     }
 
     @Override
-    public Level getLevel() {
-        return level;
+    public Collection<? extends Renderable> getGameObjects() {
+        return objects;
     }
 
     @Override
-    public Collection<? extends Renderable> getGameObjects() {
-        return objects;
+    public Bitmap getLevelBitmap() {
+        return level.bitmap.cut((int) player.pos.x, (int) player.pos.y, frameContext.getScreenW(), frameContext.getScreenH());
     }
 }
