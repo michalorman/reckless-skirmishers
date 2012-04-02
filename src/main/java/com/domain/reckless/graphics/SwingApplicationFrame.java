@@ -74,6 +74,11 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
         return keyboard;
     }
 
+    @Override
+    public void renderScreen() {
+        screen.render();
+    }
+
     public static class Builder {
         private final int w;
         private final int h;

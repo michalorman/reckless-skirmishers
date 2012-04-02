@@ -1,6 +1,11 @@
 package com.domain.reckless.game;
 
 import com.domain.reckless.core.controls.Keyboard;
+import com.domain.reckless.graphics.Screen;
+import com.domain.reckless.world.Renderable;
+import com.domain.reckless.world.level.Level;
+
+import java.util.Collection;
 
 /**
  * Single point of all information regarding the running game.
@@ -33,4 +38,10 @@ public interface GameContext {
      * @return keyboard handler.
      */
     Keyboard getKeyboard();
+
+    Screen getScreen();
+
+    Level getLevel();
+
+    Collection<? extends Renderable> getGameObjects();
 }

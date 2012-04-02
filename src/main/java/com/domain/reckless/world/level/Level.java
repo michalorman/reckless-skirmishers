@@ -1,28 +1,33 @@
 package com.domain.reckless.world.level;
 
+import com.domain.reckless.graphics.bitmap.Bitmap;
+
 public class Level {
-    private int width, height;
-    private int[][] tiles;
 
-    public Level(int w, int h) {
-        width = w;
-        height = h;
-        tiles = new int[w][];
-        for (int[] tileLine : tiles) {
-            tileLine = new int[w];
+    public static final int SMALL = 48;
+
+    public Tile[] tiles;
+
+    public Bitmap bitmap;
+
+    public int width;
+
+    public int height;
+
+    public Level(int width, int height) {
+        this.width = width;
+        this.height = height;
+
+        tiles = new Tile[width * height];
+    }
+
+    public void createBitmap() {
+        bitmap = new Bitmap(width * tiles[0].bitmap.w, height * tiles[0].bitmap.h);
+        for (int i = 0; i < tiles.length; i++) {
+            Tile tile = tiles[i];
+            int x = (i * tile.bitmap.w) % bitmap.w;
+            int y = ((i - x) / tile.bitmap.w) % bitmap.h;
+            bitmap.blit(tile.bitmap, x * 32, y * 32);
         }
     }
-
-    public int getTile(int x, int y) {
-        try {
-            return tiles[y][x];
-        } catch (IndexOutOfBoundsException e) {
-            return 0;
-        }
-    }
-
-    public int getTile(double x, double y) {
-        return getTile((int) x, (int) y);
-    }
-
 }

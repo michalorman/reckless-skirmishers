@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Bitmap {
-    protected int w, h;
-    protected int pixels[];
+    public int w, h;
+    public int pixels[];
 
     public Bitmap(int w, int h) {
         this(w, h, true);
