@@ -8,6 +8,6 @@ public class RGB {
         r = color & 0xff0000;
         g = color & 0xff00;
         b = color & 0xff;
-        alpha = color & 0xff000000;
+        alpha = (color >> 24) & 0xff;
     }
 }

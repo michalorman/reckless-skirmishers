@@ -12,5 +12,9 @@ public interface Screen {
 
     void blit(Bitmap bmp, int x, int y);
 
+    void alphaBlit(Bitmap bmp, int x, int y, int alpha);
+
+    void colorBlit(Bitmap bmp, int x, int y, int alpha);
+
     void write(BitmapFont font, int x, int y, String message);
 }
