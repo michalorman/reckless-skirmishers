@@ -10,6 +10,7 @@ import com.domain.reckless.world.*;
 import com.domain.reckless.world.ai.AI;
 import com.domain.reckless.world.ai.RandomAI;
 import com.domain.reckless.world.ai.RandomDestAI;
+import com.domain.reckless.world.anim.FixedDurationAnimation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,13 +44,13 @@ public class StrategyDrivenGameContext implements GameContext {
 
         // TODO: test objects
         for (int i = 0; i < 5 + Math.random() * 10; i++) {
-            Enemy enemy = new Enemy(randomAI, Assets.Bitmaps.pharao);
+            Enemy enemy = new Enemy(randomAI, Assets.Bitmaps.pharao, new FixedDurationAnimation(25, 4));
             enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
             enemy.delta = new Vect2D(1, 1);
             objects.add(enemy);
         }
         for (int i = 0; i < 15 + Math.random() * 50; i++) {
-            Enemy enemy = new Enemy(destAI, Assets.Bitmaps.mummy);
+            Enemy enemy = new Enemy(destAI, Assets.Bitmaps.mummy, new FixedDurationAnimation(200, 4));
             enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
             enemy.delta = new Vect2D(0.5 + Math.random(), 0.5 + Math.random());
             objects.add(enemy);
