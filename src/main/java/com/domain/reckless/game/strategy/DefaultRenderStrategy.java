@@ -4,6 +4,7 @@ import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.res.Assets;
 import com.domain.reckless.world.Renderable;
 
+import java.util.Collection;
 import java.util.Set;
 
 public class DefaultRenderStrategy implements RenderStrategy {
@@ -15,7 +16,7 @@ public class DefaultRenderStrategy implements RenderStrategy {
     }
 
     @Override
-    public void render(Set<? extends Renderable> renderables, int fps) {
+    public void render(Collection<? extends Renderable> renderables, int fps) {
         screen.blit(Assets.Bitmaps.background, 0, 0);
         for (Renderable renderable : renderables) {
             renderable.render(screen);

@@ -16,8 +16,16 @@ public abstract class GameObject
      */
     @Override
     public int compareTo(GameObject o) {
-        if (this == o || pos.y == o.pos.y) return 0;
-        if (pos.y > o.pos.y) return -1;
-        return 1;
+        if (this == o)
+            return 0;
+        if (pos.y < o.pos.y)
+            return -1;
+        if (pos.y > o.pos.y)
+             return 1;
+        if (pos.x < o.pos.x)
+            return -1;
+        if (pos.x > o.pos.x)
+            return 1;
+        return 0;
     }
 }

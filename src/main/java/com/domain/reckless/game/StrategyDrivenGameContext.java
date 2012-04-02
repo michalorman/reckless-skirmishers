@@ -7,6 +7,8 @@ import com.domain.reckless.world.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -21,7 +23,7 @@ public class StrategyDrivenGameContext implements GameContext {
 
     private RenderStrategy renderStrategy;
 
-    private Set<GameObject> objects = new TreeSet<>();
+    private Collection<GameObject> objects = new ArrayList<>();
 
     public StrategyDrivenGameContext(UpdateStrategy updateStrategy, RenderStrategy renderStrategy) {
         LOGGER.info("Creating strategy driven game context");
@@ -29,13 +31,13 @@ public class StrategyDrivenGameContext implements GameContext {
         this.renderStrategy = renderStrategy;
 
         // TODO: test objects
-        for (int i = 0; i < 1 + Math.random() * 5; i++) {
+        for (int i = 0; i < 5 + Math.random() * 10; i++) {
             Enemy enemy = new Pharao();
             enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
             enemy.delta = new Vect2D(1, 1);
             objects.add(enemy);
         }
-        for (int i = 0; i < 4 + Math.random() * 10; i++) {
+        for (int i = 0; i < 15 + Math.random() * 50; i++) {
             Enemy enemy = new Mummy();
             enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
             enemy.delta = new Vect2D(1, 1);
@@ -59,6 +61,6 @@ public class StrategyDrivenGameContext implements GameContext {
 
     @Override
     public void render(float interpolation, int fps) {
-        renderStrategy.render(objects, fps);
+        renderStrategy.render(new TreeSet<>(objects), fps);
     }
 }
