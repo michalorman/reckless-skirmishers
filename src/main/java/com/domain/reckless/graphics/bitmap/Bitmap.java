@@ -37,8 +37,7 @@ public class Bitmap {
             int g = col & 0xff00;
             int b = col & 0xff;
             int result = (alpha << 24) | r | g | b;
-            int pixelAtPos = PixelUtils.blendColors(result, pixels[y * w + x]);
-            pixels[y * w + x] = pixelAtPos;
+            pixels[y * w + x] = PixelUtils.blendColors(pixels[y * w + x], result);
         }
     }
 
@@ -122,11 +121,11 @@ public class Bitmap {
     public void rectFill(int x1, int y1, int x2, int y2, int color) {
         for (int xx = x1; xx < x2; xx++) {
             for (int yy = y1; yy < y2; yy++) {
-                if (color < 0) {
-                    int alpha = (color >> 24) & 0xff;
-                    putPixel(xx, yy, color, alpha);
-                } else {
+                int alpha = (color >> 24) & 0xff;
+                if (alpha == 0xff) {
                     putPixel(xx, yy, color);
+                } else {
+                    putPixel(xx, yy, color, alpha);
                 }
             }
         }
