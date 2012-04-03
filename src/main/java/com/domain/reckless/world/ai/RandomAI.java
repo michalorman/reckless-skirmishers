@@ -11,6 +11,7 @@ public class RandomAI extends AbstractAI {
         Vect2D delta = new Vect2D();
         delta.x = sign() * object.delta.x;
         delta.y = sign() * object.delta.y;
+        object.animation.setAnimating(true);
         return delta;
     }
 

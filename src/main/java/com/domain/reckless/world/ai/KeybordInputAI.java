@@ -18,14 +18,17 @@ public class KeybordInputAI extends AbstractAI<Player> {
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
             delta.x = -player.delta.x;
             player.facing = 2;
+            player.animation.setAnimating(true);
         }
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
             delta.x = player.delta.x;
             player.facing = 6;
+            player.animation.setAnimating(true);
         }
         if (keyboard.isKeyPressed(KeyEvent.VK_DOWN)) {
             delta.y = player.delta.y;
             player.facing = 0;
+            player.animation.setAnimating(true);
             if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
                 player.facing = 1;
             }
@@ -36,6 +39,7 @@ public class KeybordInputAI extends AbstractAI<Player> {
         if (keyboard.isKeyPressed(KeyEvent.VK_UP)) {
             delta.y = -player.delta.y;
             player.facing = 4;
+            player.animation.setAnimating(true);
             if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
                 player.facing = 3;
             }

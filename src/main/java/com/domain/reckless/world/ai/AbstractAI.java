@@ -7,6 +7,7 @@ import com.domain.reckless.world.GameObject;
 public abstract class AbstractAI<T extends GameObject> implements AI<T> {
     @Override
     public void nextMove(T object, GameContext context) {
+
         Vect2D delta = doNextMove(object, context);
 
         if (delta.x != 0 && delta.y != 0) {

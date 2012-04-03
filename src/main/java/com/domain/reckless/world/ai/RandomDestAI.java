@@ -49,6 +49,8 @@ public class RandomDestAI extends AbstractAI {
             object.dest = null;
         }
 
+        object.animation.setAnimating(true);
+
         return delta;
     }
 }
