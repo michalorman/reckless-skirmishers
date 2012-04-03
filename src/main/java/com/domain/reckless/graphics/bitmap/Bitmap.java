@@ -131,6 +131,10 @@ public class Bitmap {
         }
     }
 
+    public void rectFill(Rectangle rect, int color) {
+        rectFill(rect.x1, rect.y1, rect.x2, rect.y2, color);
+    }
+
     //TODO move Font.write() body to this method?
     public void write(BitmapFont font, int x, int y, String message) {
         font.write(this, x, y, message);

@@ -15,7 +15,7 @@ public class Player extends GameObject {
     public Player() {
         super(new KeybordInputAI(),
                 new FixedDurationAnimation(100, 6),
-                new Rectangle(20, 0, 32, 32));
+                new Rectangle(10, 20, 23, 32));
     }
 
     @Override

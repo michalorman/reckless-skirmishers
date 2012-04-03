@@ -20,6 +20,7 @@ public abstract class GameObject
     protected GameObject(AI ai, Animation animation, Rectangle boundingBox) {
         this.ai = ai;
         this.animation = animation;
+        this.boundingBox = boundingBox;
     }
 
     @SuppressWarnings("unchecked")
@@ -57,7 +58,7 @@ public abstract class GameObject
     @Override
     public boolean collides(Collidable collidable) {
         Rectangle thisBB = getBoundingBox();
-        Rectangle thatBB = getBoundingBox();
+        Rectangle thatBB = collidable.getBoundingBox();
         return thisBB.intersects(thatBB);
     }
 }

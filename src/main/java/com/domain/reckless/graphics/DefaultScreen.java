@@ -28,6 +28,11 @@ public class DefaultScreen extends ImageBitmap implements Screen {
     }
 
     @Override
+    public void rectFill(int x1, int y1, int x2, int y2, int color) {
+        super.rectFill(x1 + xOffset, y1 + yOffset, x2 + xOffset, y2 + yOffset, color);
+    }
+
+    @Override
     public void setOffset(int x, int y) {
         xOffset = x;
         yOffset = y;

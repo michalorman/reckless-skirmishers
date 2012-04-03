@@ -1,6 +1,7 @@
 package com.domain.reckless.game;
 
 import com.domain.reckless.core.controls.Keyboard;
+import com.domain.reckless.core.setting.Settings;
 import com.domain.reckless.game.strategy.RenderStrategy;
 import com.domain.reckless.game.strategy.UpdateStrategy;
 import com.domain.reckless.graphics.FrameContext;
@@ -9,10 +10,7 @@ import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.res.Assets;
-import com.domain.reckless.world.Enemy;
-import com.domain.reckless.world.GameObject;
-import com.domain.reckless.world.Player;
-import com.domain.reckless.world.Renderable;
+import com.domain.reckless.world.*;
 import com.domain.reckless.world.ai.AI;
 import com.domain.reckless.world.ai.RandomAI;
 import com.domain.reckless.world.ai.RandomDestAI;
@@ -45,11 +43,14 @@ public class StrategyDrivenGameContext implements GameContext {
 
     private Player player;
 
-    public StrategyDrivenGameContext(FrameContext frameContext, UpdateStrategy updateStrategy, RenderStrategy renderStrategy) {
+    private Settings settings;
+
+    public StrategyDrivenGameContext(FrameContext frameContext, UpdateStrategy updateStrategy, RenderStrategy renderStrategy, Settings settings) {
         LOGGER.info("Creating strategy driven game context");
         this.frameContext = frameContext;
         this.updateStrategy = updateStrategy;
         this.renderStrategy = renderStrategy;
+        this.settings = settings;
 
         AI randomAI = new RandomAI();
         AI destAI = new RandomDestAI();
@@ -60,7 +61,7 @@ public class StrategyDrivenGameContext implements GameContext {
         for (int i = 0; i < Math.random() * 4; i++) {
             Enemy enemy = new Enemy(destAI, Assets.Bitmaps.pharao,
                     new FixedDurationAnimation(250, 4, true),
-                    new Rectangle(20, 0, 32, 32));
+                    new Rectangle(5, 20, 28, 32));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
             enemy.delta = new Vect2D(0.75, 0.75);
             objects.add(enemy);
@@ -69,7 +70,7 @@ public class StrategyDrivenGameContext implements GameContext {
         for (int i = 0; i < 2 + Math.random() * 8; i++) {
             Enemy enemy = new Enemy(destAI, Assets.Bitmaps.mummy,
                     new FixedDurationAnimation(200, 4, true),
-                    new Rectangle(20, 0, 32, 32));
+                    new Rectangle(5, 20, 28, 32));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
             enemy.delta = new Vect2D(0.5 + Math.random(), 0.5 + Math.random());
             objects.add(enemy);
@@ -78,7 +79,7 @@ public class StrategyDrivenGameContext implements GameContext {
         for (int i = 0; i < 5 + Math.random() * 15; i++) {
             Enemy enemy = new Enemy(destAI, Assets.Bitmaps.snake,
                     new FixedDurationAnimation(75, 4, true),
-                    new Rectangle(25, 10, 22, 28));
+                    new Rectangle(10, 25, 20, 32));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
             enemy.delta = new Vect2D(2.75, 2.75);
             objects.add(enemy);
@@ -181,8 +182,13 @@ public class StrategyDrivenGameContext implements GameContext {
     }
 
     @Override
-    public Collection<? extends Renderable> getGameObjects() {
+    public Collection<? extends Renderable> getRenderableObjects() {
         return new TreeSet<>(objects);
+    }
+
+    @Override
+    public Collection<? extends Collidable> getCollidableObjects() {
+        return objects;
     }
 
     @Override
@@ -198,5 +204,10 @@ public class StrategyDrivenGameContext implements GameContext {
     @Override
     public int getPlayerRenderPosY() {
         return player.getRenderPosY();
+    }
+
+    @Override
+    public Settings getSettings() {
+        return settings;
     }
 }

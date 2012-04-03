@@ -18,7 +18,8 @@ public class InMemorySettings implements Settings {
 
     public void applyDefaults() {
         defaults.put(Setting.LOCALE, "en");
-        defaults.put(Setting.DRAW_FPS, "1");
+        defaults.put(Setting.DRAW_FPS, "true");
+        defaults.put(Setting.DRAW_BBOX, "false");
         defaults.put(Setting.SCREEN_WIDTH, "512");
         defaults.put(Setting.SCREEN_HEIGHT, "384");
         defaults.put(Setting.SCREEN_SCALE, "2");
@@ -50,6 +51,11 @@ public class InMemorySettings implements Settings {
     }
 
     @Override
+    public boolean getBool(Setting setting) {
+        return Boolean.valueOf(get(setting));
+    }
+
+    @Override
     public String getDefault(Setting setting) {
         return defaults.get(setting);
     }
@@ -62,6 +68,11 @@ public class InMemorySettings implements Settings {
     @Override
     public double getDefaultDouble(Setting setting) {
         return Double.valueOf(getDefault(setting));
+    }
+
+    @Override
+    public boolean getDefaultBool(Setting setting) {
+        return Boolean.valueOf(getDefault(setting));
     }
 
     public void setSetting(Setting setting, String value) {

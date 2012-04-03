@@ -2,6 +2,7 @@ package com.domain.reckless.world.ai;
 
 import com.domain.reckless.game.GameContext;
 import com.domain.reckless.math.Vect2D;
+import com.domain.reckless.world.Collidable;
 import com.domain.reckless.world.GameObject;
 
 public abstract class AbstractAI<T extends GameObject> implements AI<T> {
@@ -23,6 +24,16 @@ public abstract class AbstractAI<T extends GameObject> implements AI<T> {
 
         object.pos.x += delta.x;
         object.pos.y += delta.y;
+
+        for (Collidable collidable : context.getCollidableObjects()) {
+            if (object != collidable) {
+                if (object.collides(collidable)) {
+                    object.pos.x -= delta.x;
+                    object.pos.y -= delta.y;
+                    break;
+                }
+            }
+        }
     }
 
     /**
