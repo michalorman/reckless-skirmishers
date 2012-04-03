@@ -9,11 +9,17 @@ public class ImageBitmap extends Bitmap {
 
     public ImageBitmap(int w, int h) {
         super(w, h, false);
-        image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        image = getCompatibleImage(w, h);
         pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     }
 
     public Image getImage() {
         return image;
+    }
+
+    private static BufferedImage getCompatibleImage(int w, int h) {
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsConfiguration config = env.getDefaultScreenDevice().getDefaultConfiguration();
+        return config.createCompatibleImage(w, h);
     }
 }
