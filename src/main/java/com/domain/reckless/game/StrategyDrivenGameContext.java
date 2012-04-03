@@ -56,17 +56,24 @@ public class StrategyDrivenGameContext implements GameContext {
         generateLevel();
 
         // TODO: test objects
-        for (int i = 0; i < 5 + Math.random() * 10; i++) {
-            Enemy enemy = new Enemy(randomAI, Assets.Bitmaps.pharao, new FixedDurationAnimation(25, 4));
+        for (int i = 0; i < Math.random() * 4; i++) {
+            Enemy enemy = new Enemy(destAI, Assets.Bitmaps.pharao, new FixedDurationAnimation(250, 4, true));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
-            enemy.delta = new Vect2D(1, 1);
+            enemy.delta = new Vect2D(0.75, 0.75);
             objects.add(enemy);
         }
 
-        for (int i = 0; i < 15 + Math.random() * 50; i++) {
+        for (int i = 0; i < 2 + Math.random() * 8; i++) {
             Enemy enemy = new Enemy(destAI, Assets.Bitmaps.mummy, new FixedDurationAnimation(200, 4, true));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
             enemy.delta = new Vect2D(0.5 + Math.random(), 0.5 + Math.random());
+            objects.add(enemy);
+        }
+
+        for (int i = 0; i < 5 + Math.random() * 15; i++) {
+            Enemy enemy = new Enemy(destAI, Assets.Bitmaps.snake, new FixedDurationAnimation(75, 4, true));
+            enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
+            enemy.delta = new Vect2D(2.75, 2.75);
             objects.add(enemy);
         }
 

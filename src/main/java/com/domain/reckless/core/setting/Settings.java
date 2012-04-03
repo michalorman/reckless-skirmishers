@@ -8,16 +8,21 @@ public interface Settings {
         LOCALE,
         DRAW_FPS,
         SCREEN_HEIGHT,
-        SCREEN_WIDTH
+        SCREEN_WIDTH,
+        SCREEN_SCALE
     }
 
-    String getSetting(Setting setting);
+    String get(Setting setting);
 
-    int getSettingAsInt(Setting setting);
+    int getInt(Setting setting);
 
-    String getDefaultSetting(Setting setting);
+    double getDouble(Setting setting);
 
-    int getDefaultSettingAsInt(Setting setting);
+    String getDefault(Setting setting);
+
+    int getDefaultInt(Setting setting);
+
+    double getDefaultDouble(Setting setting);
 
     void setSetting(Setting setting, String value);
 

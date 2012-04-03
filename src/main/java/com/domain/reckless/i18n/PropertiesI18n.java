@@ -18,12 +18,12 @@ public class PropertiesI18n implements I18n {
     private Properties properties = new Properties();
 
     public PropertiesI18n(Settings settings) throws IOException {
-        LOGGER.info("Loading locale for language: '{}'", settings.getSetting(LOCALE));
-        String fileName = format("/messages_%s.properties", settings.getSetting(LOCALE));
+        LOGGER.info("Loading locale for language: '{}'", settings.get(LOCALE));
+        String fileName = format("/messages_%s.properties", settings.get(LOCALE));
         InputStream in = getClass().getResourceAsStream(fileName);
         if (in == null) {
             LOGGER.warn("Locale file: '{}' not found. Loading default locale.", fileName);
-            fileName = format("/messages_%s.properties", settings.getDefaultSetting(LOCALE));
+            fileName = format("/messages_%s.properties", settings.getDefault(LOCALE));
             in = getClass().getResourceAsStream(fileName);
             if (in == null) {
                 LOGGER.error("Unable to load default locale file.");

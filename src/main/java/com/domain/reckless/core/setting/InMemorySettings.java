@@ -21,6 +21,7 @@ public class InMemorySettings implements Settings {
         defaults.put(Setting.DRAW_FPS, "1");
         defaults.put(Setting.SCREEN_WIDTH, "512");
         defaults.put(Setting.SCREEN_HEIGHT, "384");
+        defaults.put(Setting.SCREEN_SCALE, "2");
 
         verifyDefaults();
     }
@@ -34,23 +35,33 @@ public class InMemorySettings implements Settings {
         }
     }
 
-    public String getSetting(Setting setting) {
+    public String get(Setting setting) {
         return settings.containsKey(setting) ? settings.get(setting) : defaults.get(setting);
     }
 
     @Override
-    public int getSettingAsInt(Setting setting) {
-        return Integer.valueOf(getSetting(setting));
+    public int getInt(Setting setting) {
+        return Integer.valueOf(get(setting));
     }
 
     @Override
-    public String getDefaultSetting(Setting setting) {
+    public double getDouble(Setting setting) {
+        return Double.valueOf(get(setting));
+    }
+
+    @Override
+    public String getDefault(Setting setting) {
         return defaults.get(setting);
     }
 
     @Override
-    public int getDefaultSettingAsInt(Setting setting) {
-        return Integer.valueOf(defaults.get(setting));
+    public int getDefaultInt(Setting setting) {
+        return Integer.valueOf(getDefault(setting));
+    }
+
+    @Override
+    public double getDefaultDouble(Setting setting) {
+        return Double.valueOf(getDefault(setting));
     }
 
     public void setSetting(Setting setting, String value) {

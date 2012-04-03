@@ -9,7 +9,6 @@ import com.domain.reckless.game.StrategyDrivenGameContext;
 import com.domain.reckless.game.strategy.DefaultRenderStrategy;
 import com.domain.reckless.game.strategy.DefaultUpdateStrategy;
 import com.domain.reckless.graphics.FrameContext;
-import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.graphics.SwingApplicationFrame;
 import com.domain.reckless.i18n.I18n;
 import com.domain.reckless.i18n.PropertiesI18n;
@@ -33,7 +32,8 @@ public class RecklessSkirmishers {
                 settings.setSetting(Settings.Setting.SCREEN_WIDTH, res[0]);
                 settings.setSetting(Settings.Setting.SCREEN_HEIGHT, res[1]);
             }
-        };
+        },
+        SCALE("scale", Settings.Setting.SCREEN_SCALE);
 
         private String cmd;
         private Settings.Setting setting;
@@ -79,9 +79,9 @@ public class RecklessSkirmishers {
             I18n i18n = new PropertiesI18n(settings);
 
             FrameContext frameContext = new SwingApplicationFrame.Builder(
-                    settings.getSettingAsInt(Settings.Setting.SCREEN_WIDTH),
-                    settings.getSettingAsInt(Settings.Setting.SCREEN_HEIGHT))
-                    .scale(2.0)
+                    settings.getInt(Settings.Setting.SCREEN_WIDTH),
+                    settings.getInt(Settings.Setting.SCREEN_HEIGHT))
+                    .scale(settings.getDouble(Settings.Setting.SCREEN_SCALE))
                     .title(i18n.t("game.ui.title"))
                     .build();
 
