@@ -15,7 +15,7 @@ public class Player extends GameObject {
     public Player() {
         super(new KeybordInputAI(),
                 new FixedDurationAnimation(100, 6),
-                new Rectangle(20, 0, 32, 32));
+                new Rectangle(0, 20, 32, 32));
     }
 
     @Override
@@ -24,6 +24,7 @@ public class Player extends GameObject {
         screen.blit(image,
                 (int) pos.x - image.getWidth() / 2,
                 (int) pos.y - image.getHeight() / 2);
+        screen.rectFill(getBoundingBox(), 0x11FF00FF);
     }
 
     public int getRenderPosX() {

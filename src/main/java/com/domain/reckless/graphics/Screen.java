@@ -1,6 +1,7 @@
 package com.domain.reckless.graphics;
 
 import com.domain.reckless.graphics.bitmap.Bitmap;
+import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.graphics.font.BitmapFont;
 
 public interface Screen {
@@ -23,4 +24,8 @@ public interface Screen {
     int getWidth();
 
     int getHeight();
+
+    void rectFill(int x1, int y1, int x2, int y2, int color);
+
+    void rectFill(Rectangle rect, int color);
 }
