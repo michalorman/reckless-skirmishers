@@ -53,4 +53,11 @@ public abstract class GameObject
                 boundingBox.x2 + (int) pos.x - 16,
                 boundingBox.y2 + (int) pos.y - 16);
     }
+
+    @Override
+    public boolean collides(Collidable collidable) {
+        Rectangle thisBB = getBoundingBox();
+        Rectangle thatBB = getBoundingBox();
+        return thisBB.intersects(thatBB);
+    }
 }
