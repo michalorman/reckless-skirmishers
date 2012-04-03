@@ -81,12 +81,12 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
     }
 
     @Override
-    public int getScreenW() {
+    public int getScreenWidth() {
         return screen.getWidth();
     }
 
     @Override
-    public int getScreenH() {
+    public int getScreenHeight() {
         return screen.getHeight();
     }
 

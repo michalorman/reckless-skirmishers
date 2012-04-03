@@ -10,9 +10,9 @@ public interface FrameContext {
 
     void renderScreen();
 
-    int getScreenW();
+    int getScreenWidth();
 
-    int getScreenH();
+    int getScreenHeight();
 
     void centerScreenAt(int posx, int posy);
 }
