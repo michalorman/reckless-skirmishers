@@ -8,9 +8,13 @@ import com.domain.reckless.world.GameObject;
 // is reached picks another point.
 public class RandomDestAI extends AbstractAI {
 
+    public Vect2D lastPos;
+//    public double
+
     @Override
     protected Vect2D doNextMove(GameObject object, GameContext context) {
         Vect2D delta = new Vect2D();
+        lastPos = new Vect2D(object.pos);
 
         if (object.dest == null) {
             // pick new destination

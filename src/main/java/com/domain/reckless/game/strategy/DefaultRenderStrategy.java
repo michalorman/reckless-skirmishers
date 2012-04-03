@@ -34,11 +34,11 @@ public class DefaultRenderStrategy implements RenderStrategy {
                 context.getPlayerRenderPosY());
 
         for (Renderable renderable : context.getRenderableObjects()) {
-            if (drawBBox && renderable instanceof Collidable) {
-                screen.rectFill(((Collidable) renderable).getBoundingBox(), 0x11ff00ff);
-            }
-            
             renderable.render(screen);
+
+            if (renderable instanceof Collidable) {
+                screen.rectFill(((Collidable) renderable).getBoundingBox(), 0x55ff00ff);
+            }
         }
 
         screen.setOffset(0, 0);
