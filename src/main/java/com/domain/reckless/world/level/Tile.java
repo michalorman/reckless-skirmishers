@@ -5,6 +5,9 @@ import com.domain.reckless.res.Assets;
 
 public class Tile {
 
-    public Bitmap bitmap = Assets.Bitmaps.floorTiles[(int) (Math.random() * 2)][(int) (Math.random() * 5)];
+    public Bitmap bitmap;
 
+    public Tile(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
 }

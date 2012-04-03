@@ -4,7 +4,7 @@ import com.domain.reckless.graphics.bitmap.Bitmap;
 
 public class Level {
 
-    public static final int SMALL = 48;
+    public static final int SMALL = 32;
 
     public Tile[] tiles;
 
