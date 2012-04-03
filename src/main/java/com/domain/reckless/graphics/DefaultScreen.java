@@ -37,4 +37,7 @@ public class DefaultScreen extends ImageBitmap implements Screen {
         frameContext.render();
     }
 
+    public void centerAt(int posx, int posy) {
+        setOffset(-(posx - w / 2), -(posy - h / 2));
+    }
 }

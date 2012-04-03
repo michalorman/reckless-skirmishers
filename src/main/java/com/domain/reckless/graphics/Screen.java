@@ -17,4 +17,10 @@ public interface Screen {
     void colorBlit(Bitmap bmp, int x, int y, int alpha);
 
     void write(BitmapFont font, int x, int y, String message);
+
+    void centerAt(int posx, int posy);
+
+    int getWidth();
+
+    int getHeight();
 }

@@ -7,6 +7,7 @@ import com.domain.reckless.world.anim.Animation;
 
 public class Enemy extends GameObject {
     private Bitmap[][] bitmap;
+//    private static final int yOffs = 8;
 
     public Enemy(AI ai, Bitmap[][] bitmap, Animation animation) {
         super(ai, animation);
@@ -16,6 +17,9 @@ public class Enemy extends GameObject {
 
     @Override
     public void render(Screen screen) {
-        screen.blit(bitmap[facing][animation.nextFrameIndex(this)], (int) pos.x, (int) pos.y);
+        Bitmap image = bitmap[facing][animation.nextFrameIndex(this)];
+        screen.blit(image,
+                (int) pos.x - image.getWidth() / 2,
+                (int) pos.y - image.getHeight() / 2);
     }
 }

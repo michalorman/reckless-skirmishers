@@ -4,6 +4,7 @@ import com.domain.reckless.game.GameContext;
 import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.res.Assets;
+import com.domain.reckless.world.Player;
 import com.domain.reckless.world.Renderable;
 
 import java.util.Collection;
@@ -24,13 +25,16 @@ public class DefaultRenderStrategy implements RenderStrategy {
         Screen screen = context.getScreen();
 
         Bitmap bitmap = context.getLevelBitmap();
-
         screen.blit(bitmap, 0, 0);
+
+        screen.centerAt(context.getPlayerRenderPosX(),
+                context.getPlayerRenderPosY());
 
         for (Renderable renderable : context.getGameObjects()) {
             renderable.render(screen);
         }
 
+        screen.setOffset(0, 0);
         screen.write(Assets.Fonts.font, 5, 5, fps + " FPS");
     }
 }

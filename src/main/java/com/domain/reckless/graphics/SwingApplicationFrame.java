@@ -89,6 +89,11 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
         return screen.getHeight();
     }
 
+    @Override
+    public void centerScreenAt(int posx, int posy) {
+        screen.centerAt(posx, posy);
+    }
+
     public static class Builder {
         private final int w;
         private final int h;

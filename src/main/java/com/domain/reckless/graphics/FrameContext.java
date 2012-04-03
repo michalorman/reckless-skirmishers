@@ -13,4 +13,6 @@ public interface FrameContext {
     int getScreenW();
 
     int getScreenH();
+
+    void centerScreenAt(int posx, int posy);
 }

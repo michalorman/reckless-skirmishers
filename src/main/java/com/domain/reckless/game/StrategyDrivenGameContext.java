@@ -50,17 +50,19 @@ public class StrategyDrivenGameContext implements GameContext {
         AI randomAI = new RandomAI();
         AI destAI = new RandomDestAI();
 
+        generateLevel();
+
         // TODO: test objects
         for (int i = 0; i < 5 + Math.random() * 10; i++) {
             Enemy enemy = new Enemy(randomAI, Assets.Bitmaps.pharao, new FixedDurationAnimation(25, 4));
-            enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
+            enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
             enemy.delta = new Vect2D(1, 1);
             objects.add(enemy);
         }
 
         for (int i = 0; i < 15 + Math.random() * 50; i++) {
             Enemy enemy = new Enemy(destAI, Assets.Bitmaps.mummy, new FixedDurationAnimation(200, 4, true));
-            enemy.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
+            enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
             enemy.delta = new Vect2D(0.5 + Math.random(), 0.5 + Math.random());
             objects.add(enemy);
         }
@@ -69,7 +71,6 @@ public class StrategyDrivenGameContext implements GameContext {
         player.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
         player.delta = new Vect2D(3, 3);
         objects.add(player);
-        generateLevel();
     }
 
     private void generateLevel() {
@@ -108,11 +109,21 @@ public class StrategyDrivenGameContext implements GameContext {
 
     @Override
     public Collection<? extends Renderable> getGameObjects() {
-        return objects;
+        return new TreeSet<>(objects);
     }
 
     @Override
     public Bitmap getLevelBitmap() {
         return level.bitmap.cut((int) player.pos.x, (int) player.pos.y, frameContext.getScreenW(), frameContext.getScreenH());
+    }
+
+    @Override
+    public int getPlayerRenderPosX() {
+        return player.getRenderPosX();
+    }
+
+    @Override
+    public int getPlayerRenderPosY() {
+        return player.getRenderPosY();
     }
 }
