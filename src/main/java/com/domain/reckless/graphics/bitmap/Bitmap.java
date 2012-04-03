@@ -47,7 +47,7 @@ public class Bitmap {
 
     public void blit(Bitmap bitmap, int x, int y) {
         Rectangle blitArea = new Rectangle(x, y, x + bitmap.w, y + bitmap.h);
-        adjustBlitArea(blitArea);
+        adjustArea(blitArea);
         int blitWidth = blitArea.x2 - blitArea.x1;
         for (int yy = blitArea.y1; yy < blitArea.y2; yy++) {
             int targetPixel = yy * w + blitArea.x1;
@@ -68,7 +68,7 @@ public class Bitmap {
 
     public void alphaBlit(Bitmap bitmap, int x, int y, int alpha) {
         Rectangle blitArea = new Rectangle(x, y, x + bitmap.w, y + bitmap.h);
-        adjustBlitArea(blitArea);
+        adjustArea(blitArea);
         int blitWidth = blitArea.x2 - blitArea.x1;
         for (int yy = blitArea.y1; yy < blitArea.y2; yy++) {
             int targetPixel = yy * w + blitArea.x1;
@@ -88,7 +88,7 @@ public class Bitmap {
     //TODO Fix blending colors.
     public void colorBlit(Bitmap bitmap, int x, int y, int color) {
         Rectangle blitArea = new Rectangle(x, y, x + bitmap.w, y + bitmap.h);
-        adjustBlitArea(blitArea);
+        adjustArea(blitArea);
         int blitWidth = blitArea.x2 - blitArea.x1;
         for (int yy = blitArea.y1; yy < blitArea.y2; yy++) {
             int targetPixel = yy * w + blitArea.x1;
@@ -109,8 +109,11 @@ public class Bitmap {
         Rectangle wholeArea = new Rectangle(0, 0, this.w, this.h);
         Rectangle cutArea = wholeArea.intersection(toBeCutArea);
         Bitmap bitmap = new Bitmap(cutArea.width, cutArea.height);
-        for (int yy = y; yy < y + cutArea.height; yy++) {
-            System.arraycopy(pixels, yy * this.w + cutArea.x, bitmap.pixels, (yy - y) * bitmap.w, cutArea.width);
+        if (y < 0) {
+            y = 0;
+        }
+        for (int yy = 0; yy < cutArea.height; yy++) {
+            System.arraycopy(pixels, (y + yy) * this.w + cutArea.x, bitmap.pixels, yy * bitmap.w, cutArea.width);
         }
         return bitmap;
     }
@@ -124,12 +127,12 @@ public class Bitmap {
         return x >= 0 && x < w && y >= 0 && y < h;
     }
 
-    private Rectangle adjustBlitArea(Rectangle blitArea) {
-        if (blitArea.x1 < 0) blitArea.x1 = 0;
-        if (blitArea.y1 < 0) blitArea.y1 = 0;
-        if (blitArea.x2 > w) blitArea.x2 = w;
-        if (blitArea.y2 > h) blitArea.y2 = h;
-        return blitArea;
+    private Rectangle adjustArea(Rectangle area) {
+        if (area.x1 < 0) area.x1 = 0;
+        if (area.y1 < 0) area.y1 = 0;
+        if (area.x2 > w) area.x2 = w;
+        if (area.y2 > h) area.y2 = h;
+        return area;
     }
 
     public int getWidth() {
