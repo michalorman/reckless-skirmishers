@@ -118,6 +118,19 @@ public class Bitmap {
         return bitmap;
     }
 
+    public void rectFill(int x1, int y1, int x2, int y2, int color) {
+        for (int xx = x1; xx < x2; xx++) {
+            for (int yy = y1; yy < y2; yy++) {
+                if (color < 0) {
+                    int alpha = (color >> 24) & 0xff;
+                    putPixel(xx, yy, color, alpha);
+                } else {
+                    putPixel(xx, yy, color);
+                }
+            }
+        }
+    }
+
     //TODO move Font.write() body to this method?
     public void write(BitmapFont font, int x, int y, String message) {
         font.write(this, x, y, message);
