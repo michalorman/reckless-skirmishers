@@ -6,7 +6,10 @@ package com.domain.reckless.core.setting;
 public interface Settings {
     enum Setting {
         LOCALE,
+
         DRAW_FPS,
+        DRAW_BBOX,
+
         SCREEN_HEIGHT,
         SCREEN_WIDTH,
         SCREEN_SCALE
@@ -18,11 +21,15 @@ public interface Settings {
 
     double getDouble(Setting setting);
 
+    boolean getBool(Setting setting);
+
     String getDefault(Setting setting);
 
     int getDefaultInt(Setting setting);
 
     double getDefaultDouble(Setting setting);
+
+    boolean getDefaultBool(Setting setting);
 
     void setSetting(Setting setting, String value);
 

@@ -22,6 +22,5 @@ public class Enemy extends GameObject {
         screen.blit(image,
                 (int) pos.x - image.getWidth() / 2,
                 (int) pos.y - image.getHeight() / 2);
-        screen.rectFill(getBoundingBox(), 0x11FF00FF);
     }
 }

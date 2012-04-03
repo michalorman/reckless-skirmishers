@@ -1,6 +1,7 @@
 package com.domain.reckless.game;
 
 import com.domain.reckless.core.controls.Keyboard;
+import com.domain.reckless.core.setting.Settings;
 import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.world.Collidable;
@@ -53,4 +54,6 @@ public interface GameContext {
     int getPlayerRenderPosX();
 
     int getPlayerRenderPosY();
+
+    Settings getSettings();
 }

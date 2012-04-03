@@ -1,6 +1,7 @@
 package com.domain.reckless.game;
 
 import com.domain.reckless.core.controls.Keyboard;
+import com.domain.reckless.core.setting.Settings;
 import com.domain.reckless.game.strategy.RenderStrategy;
 import com.domain.reckless.game.strategy.UpdateStrategy;
 import com.domain.reckless.graphics.FrameContext;
@@ -42,11 +43,14 @@ public class StrategyDrivenGameContext implements GameContext {
 
     private Player player;
 
-    public StrategyDrivenGameContext(FrameContext frameContext, UpdateStrategy updateStrategy, RenderStrategy renderStrategy) {
+    private Settings settings;
+
+    public StrategyDrivenGameContext(FrameContext frameContext, UpdateStrategy updateStrategy, RenderStrategy renderStrategy, Settings settings) {
         LOGGER.info("Creating strategy driven game context");
         this.frameContext = frameContext;
         this.updateStrategy = updateStrategy;
         this.renderStrategy = renderStrategy;
+        this.settings = settings;
 
         AI randomAI = new RandomAI();
         AI destAI = new RandomDestAI();
@@ -57,7 +61,7 @@ public class StrategyDrivenGameContext implements GameContext {
         for (int i = 0; i < Math.random() * 4; i++) {
             Enemy enemy = new Enemy(destAI, Assets.Bitmaps.pharao,
                     new FixedDurationAnimation(250, 4, true),
-                    new Rectangle(0, 20, 32, 32));
+                    new Rectangle(5, 20, 28, 32));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
             enemy.delta = new Vect2D(0.75, 0.75);
             objects.add(enemy);
@@ -66,7 +70,7 @@ public class StrategyDrivenGameContext implements GameContext {
         for (int i = 0; i < 2 + Math.random() * 8; i++) {
             Enemy enemy = new Enemy(destAI, Assets.Bitmaps.mummy,
                     new FixedDurationAnimation(200, 4, true),
-                    new Rectangle(0, 20, 32, 32));
+                    new Rectangle(5, 20, 28, 32));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
             enemy.delta = new Vect2D(0.5 + Math.random(), 0.5 + Math.random());
             objects.add(enemy);
@@ -200,5 +204,10 @@ public class StrategyDrivenGameContext implements GameContext {
     @Override
     public int getPlayerRenderPosY() {
         return player.getRenderPosY();
+    }
+
+    @Override
+    public Settings getSettings() {
+        return settings;
     }
 }

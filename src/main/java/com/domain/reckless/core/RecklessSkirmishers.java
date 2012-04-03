@@ -24,7 +24,10 @@ public class RecklessSkirmishers {
 
     enum CmdArgs {
         SET_LOCALE("locale", Settings.Setting.LOCALE), // --locale=en|pl
-        DRAW_FPS("drawFps", Settings.Setting.DRAW_FPS), // --drawFps=1|0
+
+        DRAW_FPS("drawFps", Settings.Setting.DRAW_FPS), // --drawFps=true|false
+        DRAW_BBOX("drawBBox", Settings.Setting.DRAW_BBOX), // --drawBBox=true|false
+
         GAME_RES("gameRes") { // --gameRes=640x480
             @Override
             public void handleArg(String cmdArg, Settings settings) {
@@ -88,8 +91,8 @@ public class RecklessSkirmishers {
             GameContext context = new StrategyDrivenGameContext(
                     frameContext,
                     new DefaultUpdateStrategy(),
-                    new DefaultRenderStrategy()
-            );
+                    new DefaultRenderStrategy(),
+                    settings);
 
             GameLoop gameLoop = new FixedLengthGameLoop(context);
             Thread thread = new Thread(gameLoop);
