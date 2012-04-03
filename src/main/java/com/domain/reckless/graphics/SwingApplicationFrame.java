@@ -38,11 +38,9 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
         canvas = new Canvas();
         canvas.setBounds(0, 0, w, h);
         canvas.setIgnoreRepaint(true);
-        //It shouldn't be focusable if we want proper keyboard handling.
         panel.add(canvas);
-        canvas.setFocusable(true);
+        canvas.setFocusable(true); //We need focus to retrieve data from listeners.
         canvas.requestFocus();
-        //It shouldn't be focusable if we want proper keyboard handling.
         panel.setFocusable(false);
         //We have canvas in panel, so now we can create buffers.
         canvas.createBufferStrategy(3);
