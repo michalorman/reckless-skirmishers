@@ -42,7 +42,7 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
         //It shouldn't be focusable if we want proper keyboard handling.
         panel.setFocusable(false);
         //We have canvas in panel, so now we can create buffers.
-        canvas.createBufferStrategy(2);
+        canvas.createBufferStrategy(3);
         bufferStrategy = canvas.getBufferStrategy();
         canvas.setBackground(Color.black);
         pack();
@@ -58,8 +58,8 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
         do {
             do {
                 Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+                g.clipRect(0, 0, getWidth(), getHeight());
                 g.scale(scale, scale);
-                g.clearRect(0, 0,  getWidth(), getHeight());
                 g.drawImage(screen.getImage(), 0, 0, screen.getWidth(), screen.getHeight(), null);
                 g.dispose();
             } while (bufferStrategy.contentsRestored());
