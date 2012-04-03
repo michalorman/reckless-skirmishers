@@ -9,10 +9,7 @@ import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.res.Assets;
-import com.domain.reckless.world.Enemy;
-import com.domain.reckless.world.GameObject;
-import com.domain.reckless.world.Player;
-import com.domain.reckless.world.Renderable;
+import com.domain.reckless.world.*;
 import com.domain.reckless.world.ai.AI;
 import com.domain.reckless.world.ai.RandomAI;
 import com.domain.reckless.world.ai.RandomDestAI;
@@ -181,8 +178,13 @@ public class StrategyDrivenGameContext implements GameContext {
     }
 
     @Override
-    public Collection<? extends Renderable> getGameObjects() {
+    public Collection<? extends Renderable> getRenderableObjects() {
         return new TreeSet<>(objects);
+    }
+
+    @Override
+    public Collection<? extends Collidable> getCollidableObjects() {
+        return objects;
     }
 
     @Override

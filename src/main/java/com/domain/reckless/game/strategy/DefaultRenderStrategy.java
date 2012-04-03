@@ -4,7 +4,6 @@ import com.domain.reckless.game.GameContext;
 import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.res.Assets;
-import com.domain.reckless.world.Player;
 import com.domain.reckless.world.Renderable;
 
 import java.util.Collection;
@@ -30,7 +29,7 @@ public class DefaultRenderStrategy implements RenderStrategy {
         screen.centerAt(context.getPlayerRenderPosX(),
                 context.getPlayerRenderPosY());
 
-        for (Renderable renderable : context.getGameObjects()) {
+        for (Renderable renderable : context.getRenderableObjects()) {
             renderable.render(screen);
         }
 

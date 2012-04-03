@@ -3,6 +3,7 @@ package com.domain.reckless.game;
 import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.graphics.bitmap.Bitmap;
+import com.domain.reckless.world.Collidable;
 import com.domain.reckless.world.Player;
 import com.domain.reckless.world.Renderable;
 import com.domain.reckless.world.level.Level;
@@ -43,7 +44,9 @@ public interface GameContext {
 
     Screen getScreen();
 
-    Collection<? extends Renderable> getGameObjects();
+    Collection<? extends Renderable> getRenderableObjects();
+
+    Collection<? extends Collidable> getCollidableObjects();
 
     Bitmap getLevelBitmap();
 
