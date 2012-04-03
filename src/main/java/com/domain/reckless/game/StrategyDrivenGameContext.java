@@ -52,14 +52,12 @@ public class StrategyDrivenGameContext implements GameContext {
         this.renderStrategy = renderStrategy;
         this.settings = settings;
 
-        AI randomAI = new RandomAI();
-        AI destAI = new RandomDestAI();
-
         generateLevel();
 
         // TODO: test objects
         for (int i = 0; i < Math.random() * 4; i++) {
-            Enemy enemy = new Enemy(destAI, Assets.Bitmaps.pharao,
+            Enemy enemy = new Enemy(new RandomDestAI(),
+                    Assets.Bitmaps.pharao,
                     new FixedDurationAnimation(250, 4, true),
                     new Rectangle(5, 20, 28, 32));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
@@ -68,7 +66,8 @@ public class StrategyDrivenGameContext implements GameContext {
         }
 
         for (int i = 0; i < 2 + Math.random() * 8; i++) {
-            Enemy enemy = new Enemy(destAI, Assets.Bitmaps.mummy,
+            Enemy enemy = new Enemy(new RandomDestAI(),
+                    Assets.Bitmaps.mummy,
                     new FixedDurationAnimation(200, 4, true),
                     new Rectangle(5, 20, 28, 32));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
@@ -77,7 +76,8 @@ public class StrategyDrivenGameContext implements GameContext {
         }
 
         for (int i = 0; i < 5 + Math.random() * 15; i++) {
-            Enemy enemy = new Enemy(destAI, Assets.Bitmaps.snake,
+            Enemy enemy = new Enemy(new RandomDestAI(),
+                    Assets.Bitmaps.snake,
                     new FixedDurationAnimation(75, 4, true),
                     new Rectangle(10, 25, 20, 32));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
