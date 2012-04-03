@@ -24,10 +24,12 @@ public class DefaultRenderStrategy implements RenderStrategy {
     @Override
     public void render(GameContext context, int fps) {
         Screen screen = context.getScreen();
+
         boolean drawBBox = context.getSettings().getBool(Settings.Setting.DRAW_BBOX);
         boolean drawFps = context.getSettings().getBool(Settings.Setting.DRAW_FPS);
+        boolean drawPlayerInfo = context.getSettings().getBool(Settings.Setting.DRAW_PLAYER_INFO);
 
-        screen.rectFill(0, 0, 600, 400, 0xff000000);
+        screen.rectFill(0, 0, 600, 500, 0xff000000);
 
         Bitmap bitmap = context.getLevelBitmap();
         screen.blit(bitmap, 0, 0);
@@ -48,7 +50,8 @@ public class DefaultRenderStrategy implements RenderStrategy {
         if (drawFps) {
             screen.write(Assets.Fonts.font, 5, 5, fps + " FPS");
         }
-
-        screen.write(Assets.Fonts.font, 395, 5, String.format("X: %d, Y: %d", context.getPlayerRenderPosX(), context.getPlayerRenderPosY()));
+        if (drawPlayerInfo) {
+            screen.write(Assets.Fonts.font, 5, 20, String.format("X: %d Y: %d", (int) context.getPlayer().pos.x, (int) context.getPlayer().pos.y));
+        }
     }
 }

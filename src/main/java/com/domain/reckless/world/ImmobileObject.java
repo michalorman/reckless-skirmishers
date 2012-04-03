@@ -15,7 +15,7 @@ public class ImmobileObject extends GameObject {
     }
 
     public ImmobileObject(int xTile) {
-        super(new ImmobileAI(), null, new Rectangle(0, 5, 32, 45));
+        super(new ImmobileAI(), null, new Rectangle(0, 10, 32, 45));
         this.xTile = xTile;
     }
 

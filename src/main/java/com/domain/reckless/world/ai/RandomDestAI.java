@@ -23,6 +23,9 @@ public class RandomDestAI extends AbstractAI {
             yLast = (int) object.pos.y;
         } else {
             ++posIdleCounter;
+            if (posIdleCounter == MAX_IDLE_COUTER / 2) {
+                object.dest = new Vect2D(-object.dest.x, -object.dest.y);
+            }
             if (posIdleCounter >= MAX_IDLE_COUTER) {
                 object.dest = null;
             }
