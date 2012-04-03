@@ -12,10 +12,11 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
     //Context
     private Keyboard keyboard;
     private DefaultScreen screen;
+    private Canvas canvas;
 
     public SwingApplicationFrame(Builder builder) {
         initGraphics(builder);
-        initKeyboard();
+        initKeyboard(canvas);
     }
 
     private void initGraphics(Builder builder) {
@@ -27,18 +28,20 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
         setTitle(builder.title);
         setResizable(builder.resizeable);
         setSize(new Dimension(w, h));
+        setFocusable(false);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JPanel panel = (JPanel) getContentPane();
         panel.setPreferredSize(new Dimension(w, h));
         panel.setLayout(null);
         //Get drawing objects
-        Canvas canvas = new Canvas();
+        canvas = new Canvas();
         canvas.setBounds(0, 0, w, h);
         canvas.setIgnoreRepaint(true);
         //It shouldn't be focusable if we want proper keyboard handling.
-        canvas.setFocusable(false);
         panel.add(canvas);
+        canvas.setFocusable(true);
+        canvas.requestFocus();
         //It shouldn't be focusable if we want proper keyboard handling.
         panel.setFocusable(false);
         //We have canvas in panel, so now we can create buffers.
@@ -48,10 +51,9 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
         pack();
     }
 
-    private void initKeyboard() {
+    private void initKeyboard(Canvas canvas) {
         keyboard = new Keyboard();
-        addKeyListener(keyboard);
-        requestFocus();
+        canvas.addKeyListener(keyboard);
     }
 
     public void render() {
