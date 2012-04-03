@@ -10,4 +10,8 @@ public class RGB {
         b = color & 0xff;
         alpha = (color >> 24) & 0xff;
     }
+
+    public int getColor() {
+        return (alpha << 24) | r | g | b;
+    }
 }
