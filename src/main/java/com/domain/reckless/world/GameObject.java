@@ -1,6 +1,7 @@
 package com.domain.reckless.world;
 
 import com.domain.reckless.game.GameContext;
+import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.world.ai.AI;
 import com.domain.reckless.world.anim.Animation;
@@ -11,11 +12,12 @@ public abstract class GameObject
     public Vect2D pos;
     public Vect2D delta;
     public Vect2D dest;
+    public Rectangle boundingBox;
     public int facing = 4;
     public AI ai;
     public Animation animation;
 
-    protected GameObject(AI ai, Animation animation) {
+    protected GameObject(AI ai, Animation animation, Rectangle boundingBox) {
         this.ai = ai;
         this.animation = animation;
     }
@@ -42,5 +44,13 @@ public abstract class GameObject
         if (pos.x > o.pos.x)
             return 1;
         return 0;
+    }
+
+    @Override
+    public Rectangle getBoundingBox() {
+        return new Rectangle(boundingBox.x1 + (int) pos.x - 16,
+                boundingBox.y1 + (int) pos.y - 16,
+                boundingBox.x2 + (int) pos.x - 16,
+                boundingBox.y2 + (int) pos.y - 16);
     }
 }

@@ -2,6 +2,7 @@ package com.domain.reckless.world;
 
 import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.graphics.bitmap.Bitmap;
+import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.res.Assets;
 import com.domain.reckless.world.ai.KeybordInputAI;
 import com.domain.reckless.world.anim.FixedDurationAnimation;
@@ -12,7 +13,9 @@ public class Player extends GameObject {
 //    private static final int yOffs = 24;
 
     public Player() {
-        super(new KeybordInputAI(), new FixedDurationAnimation(100, 6));
+        super(new KeybordInputAI(),
+                new FixedDurationAnimation(100, 6),
+                new Rectangle(20, 0, 32, 32));
     }
 
     @Override
