@@ -59,6 +59,7 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
             do {
                 Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
                 g.scale(scale, scale);
+                g.clearRect(0, 0,  getWidth(), getHeight());
                 g.drawImage(screen.getImage(), 0, 0, screen.getWidth(), screen.getHeight(), null);
                 g.dispose();
             } while (bufferStrategy.contentsRestored());
