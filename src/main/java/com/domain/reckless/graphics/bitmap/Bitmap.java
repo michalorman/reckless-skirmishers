@@ -96,14 +96,14 @@ public class Bitmap {
             targetPixel -= sourcePixel;
             for (int xx = sourcePixel; xx < sourcePixel + blitWidth; xx++) {
                 int col = bitmap.pixels[xx];
-                RGB rgb = new RGB(bitmap.pixels[xx]);
-                if (rgb.alpha > 0) {//alpha > 0
-                    pixels[targetPixel + xx] = PixelUtils.blendColors(color, col);
+                if (col < 0) {//alpha > 0
+                    pixels[targetPixel + xx] = PixelUtils.blendColors(col, color);
                 }
             }
         }
     }
 
+    //TODO check performance, check bounds.
     public Bitmap cut(int x, int y, int w, int h) {
         Rectangle toBeCutArea = new Rectangle(x, y, x + w, y + h);
         Rectangle wholeArea = new Rectangle(0, 0, this.w, this.h);
