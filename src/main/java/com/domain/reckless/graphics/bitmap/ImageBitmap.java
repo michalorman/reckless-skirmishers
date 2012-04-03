@@ -9,7 +9,8 @@ public class ImageBitmap extends Bitmap {
 
     public ImageBitmap(int w, int h) {
         super(w, h, false);
-        image = getCompatibleImage(w, h);
+//        image = getCompatibleImage(w, h);
+        image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     }
 

@@ -72,7 +72,7 @@ public class StrategyDrivenGameContext implements GameContext {
 
         player = new Player();
         player.pos = new Vect2D(Math.random() * 500, Math.random() * 380);
-        player.delta = new Vect2D(3, 3);
+        player.delta = new Vect2D(3.5, 3.5);
         objects.add(player);
     }
 

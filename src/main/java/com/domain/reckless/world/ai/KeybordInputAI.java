@@ -17,7 +17,7 @@ public class KeybordInputAI extends AbstractAI<Player> {
         keyboard.update();
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
             delta.x = -player.delta.x;
-            player.facing = 3;
+            player.facing = 2;
         }
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
             delta.x = player.delta.x;
@@ -26,10 +26,22 @@ public class KeybordInputAI extends AbstractAI<Player> {
         if (keyboard.isKeyPressed(KeyEvent.VK_DOWN)) {
             delta.y = player.delta.y;
             player.facing = 0;
+            if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
+                player.facing = 1;
+            }
+            if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
+                player.facing = 7;
+            }
         }
         if (keyboard.isKeyPressed(KeyEvent.VK_UP)) {
             delta.y = -player.delta.y;
             player.facing = 4;
+            if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
+                player.facing = 3;
+            }
+            if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
+                player.facing = 5;
+            }
         }
         if (keyboard.isKeyPressed(KeyEvent.VK_C)) {
             player.ai = new ConfudeAI(player.ai, 3000);
