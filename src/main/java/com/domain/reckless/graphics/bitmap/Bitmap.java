@@ -37,7 +37,8 @@ public class Bitmap {
             int g = col & 0xff00;
             int b = col & 0xff;
             int result = (alpha << 24) | r | g | b;
-            pixels[y * w + x] = result;
+            int pixelAtPos = PixelUtils.blendColors(result, pixels[y * w + x]);
+            pixels[y * w + x] = pixelAtPos;
         }
     }
 
