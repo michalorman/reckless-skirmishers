@@ -6,7 +6,7 @@ import com.domain.reckless.world.ai.AI;
 import com.domain.reckless.world.anim.Animation;
 
 public abstract class GameObject
-        implements Comparable<GameObject>, Renderable, Updateable {
+        implements Comparable<GameObject>, Renderable, Updateable, Collidable {
 
     public Vect2D pos;
     public Vect2D delta;
