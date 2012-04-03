@@ -4,7 +4,6 @@ import com.domain.reckless.game.GameContext;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.world.Collidable;
 import com.domain.reckless.world.GameObject;
-import com.domain.reckless.world.Renderable;
 
 public abstract class AbstractAI<T extends GameObject> implements AI<T> {
     @Override
@@ -27,9 +26,12 @@ public abstract class AbstractAI<T extends GameObject> implements AI<T> {
         object.pos.y += delta.y;
 
         for (Collidable collidable : context.getCollidableObjects()) {
-            if (object.collides(collidable)) {
-                object.pos.x -= delta.x;
-                object.pos.y -= delta.y;
+            if (object != collidable) {
+                if (object.collides(collidable)) {
+                    object.pos.x -= delta.x;
+                    object.pos.y -= delta.y;
+                    break;
+                }
             }
         }
     }

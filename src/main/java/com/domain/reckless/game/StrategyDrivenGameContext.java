@@ -75,7 +75,7 @@ public class StrategyDrivenGameContext implements GameContext {
         for (int i = 0; i < 5 + Math.random() * 15; i++) {
             Enemy enemy = new Enemy(destAI, Assets.Bitmaps.snake,
                     new FixedDurationAnimation(75, 4, true),
-                    new Rectangle(25, 10, 22, 28));
+                    new Rectangle(25, 10, 30, 28));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
             enemy.delta = new Vect2D(2.75, 2.75);
             objects.add(enemy);
