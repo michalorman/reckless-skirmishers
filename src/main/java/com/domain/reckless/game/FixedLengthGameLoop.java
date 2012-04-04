@@ -1,5 +1,7 @@
 package com.domain.reckless.game;
 
+import com.domain.reckless.game.render.GameRenderer;
+import com.domain.reckless.game.update.GameUpdater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +27,14 @@ public class FixedLengthGameLoop implements GameLoop {
 
     private GameContext context;
 
-    public FixedLengthGameLoop(GameContext context) {
+    private GameRenderer renderer;
+
+    private GameUpdater updater;
+
+    public FixedLengthGameLoop(GameContext context, GameRenderer renderer, GameUpdater updater) {
         LOGGER.info("Initializing default game loop");
+        this.renderer = renderer;
+        this.updater = updater;
         this.context = context;
     }
 
@@ -39,31 +47,20 @@ public class FixedLengthGameLoop implements GameLoop {
         double now;
         int updatesCount;
 
-        int frames = 0;
-        int fps = (int) FRAMES_RATE;
-        double lastFpsUpdateTime = System.nanoTime();
-
         while (context.isRunning()) {
             now = System.nanoTime();
             updatesCount = 0;
 
             while (now - lastUpdateTime > UPDATES_INTERVAL && updatesCount < MAX_UPDATES_PER_RENDER) {
-                context.update();
+                updater.update(context);
                 lastUpdateTime += UPDATES_INTERVAL;
                 ++updatesCount;
             }
 
             if (now - lastRenderTime > RENDERS_INTERVAL) {
                 float delta = Math.min(1.0f, (float) ((now - lastUpdateTime) / UPDATES_INTERVAL));
-                context.render(delta, fps);
+                renderer.render(context, delta);
                 lastRenderTime = now;
-                ++frames;
-            }
-
-            if (now - lastFpsUpdateTime > NANOS_PER_SECOND) {
-                fps = frames;
-                frames = 0;
-                lastFpsUpdateTime = now;
             }
 
             try {

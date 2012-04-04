@@ -1,5 +1,6 @@
 package com.domain.reckless.world.ai;
 
+import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.game.GameContext;
 import com.domain.reckless.world.GameObject;
 
@@ -17,14 +18,14 @@ public abstract class TemporalAI<T extends GameObject> implements AI<T> {
     }
 
     @Override
-    public void nextMove(T object, GameContext context) {
+    public void nextMove(T object, GameContext context, Keyboard keyboard) {
         long now = System.currentTimeMillis();
         if (now < expiresAt) {
-            doNextMove(object, context);
+            doNextMove(object, context, keyboard);
         } else {
             object.ai = currentAI;
         }
     }
 
-    protected abstract void doNextMove(T object, GameContext context);
+    protected abstract void doNextMove(T object, GameContext context, Keyboard keyboard);
 }

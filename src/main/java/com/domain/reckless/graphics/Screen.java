@@ -28,4 +28,6 @@ public interface Screen {
     void rectFill(int x1, int y1, int x2, int y2, int color);
 
     void rectFill(Rectangle rect, int color);
+
+    void render();
 }

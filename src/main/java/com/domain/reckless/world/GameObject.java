@@ -1,5 +1,6 @@
 package com.domain.reckless.world;
 
+import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.game.GameContext;
 import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.math.Vect2D;
@@ -25,8 +26,8 @@ public abstract class GameObject
 
     @SuppressWarnings("unchecked")
     @Override
-    public void update(GameContext context) {
-        ai.nextMove(this, context);
+    public void update(GameContext context, Keyboard keyboard) {
+        ai.nextMove(this, context, keyboard);
     }
 
     /*

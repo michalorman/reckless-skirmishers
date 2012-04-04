@@ -1,5 +1,6 @@
 package com.domain.reckless.world.ai;
 
+import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.game.GameContext;
 import com.domain.reckless.world.GameObject;
 
@@ -15,7 +16,7 @@ public class ConfudeAI extends TemporalAI implements AI {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void doNextMove(GameObject object, GameContext context) {
-        confudeAI.nextMove(object, context);
+    protected void doNextMove(GameObject object, GameContext context, Keyboard keyboard) {
+        confudeAI.nextMove(object, context, keyboard);
     }
 }

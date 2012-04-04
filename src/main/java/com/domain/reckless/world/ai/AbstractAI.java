@@ -1,5 +1,6 @@
 package com.domain.reckless.world.ai;
 
+import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.game.GameContext;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.world.Collidable;
@@ -7,9 +8,9 @@ import com.domain.reckless.world.GameObject;
 
 public abstract class AbstractAI<T extends GameObject> implements AI<T> {
     @Override
-    public void nextMove(T object, GameContext context) {
+    public void nextMove(T object, GameContext context, Keyboard keyboard) {
 
-        Vect2D delta = doNextMove(object, context);
+        Vect2D delta = doNextMove(object, context, keyboard);
 
         if (delta.x != 0 && delta.y != 0) {
             // move diagonally
@@ -41,9 +42,11 @@ public abstract class AbstractAI<T extends GameObject> implements AI<T> {
      * directly should should return deltas for current object position. This deltas are examined
      * to check for diagonal movements and adjusted accordingly in this case.
      *
+     *
      * @param object  The object being moved.
      * @param context The game context.
+     * @param keyboard
      * @return Delta to current object position.
      */
-    protected abstract Vect2D doNextMove(T object, GameContext context);
+    protected abstract Vect2D doNextMove(T object, GameContext context, Keyboard keyboard);
 }

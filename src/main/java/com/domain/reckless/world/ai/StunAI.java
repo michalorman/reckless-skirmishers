@@ -1,5 +1,6 @@
 package com.domain.reckless.world.ai;
 
+import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.game.GameContext;
 import com.domain.reckless.world.GameObject;
 
@@ -10,7 +11,7 @@ public class StunAI extends TemporalAI implements AI {
     }
 
     @Override
-    protected void doNextMove(GameObject object, GameContext context) {
+    protected void doNextMove(GameObject object, GameContext context, Keyboard keyboard) {
         // do nothing while stunned
     }
 }

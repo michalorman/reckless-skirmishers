@@ -11,8 +11,7 @@ import java.awt.event.KeyEvent;
 public class KeybordInputAI extends AbstractAI<Player> {
 
     @Override
-    protected Vect2D doNextMove(Player player, GameContext context) {
-        Keyboard keyboard = context.getKeyboard();
+    protected Vect2D doNextMove(Player player, GameContext context, Keyboard keyboard) {
         Vect2D delta = new Vect2D();
         keyboard.update();
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {

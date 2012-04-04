@@ -1,5 +1,6 @@
 package com.domain.reckless.world.ai;
 
+import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.game.GameContext;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.world.GameObject;
@@ -14,7 +15,7 @@ public class RandomDestAI extends AbstractAI {
     private static final int MAX_IDLE_COUTER = 50;
 
     @Override
-    protected Vect2D doNextMove(GameObject object, GameContext context) {
+    protected Vect2D doNextMove(GameObject object, GameContext context, Keyboard keyboard) {
         Vect2D delta = new Vect2D();
 
         if (xLast != (int) object.pos.x || yLast != (int) object.pos.y) {

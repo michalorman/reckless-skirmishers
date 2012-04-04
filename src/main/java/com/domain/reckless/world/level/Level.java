@@ -30,4 +30,8 @@ public class Level {
             bitmap.blit(tile.bitmap, x * tile.bitmap.w, y * tile.bitmap.h);
         }
     }
+
+    public Bitmap getBitmap(int x, int y, int width, int height) {
+        return bitmap.cut(x, y, width, height);
+    }
 }

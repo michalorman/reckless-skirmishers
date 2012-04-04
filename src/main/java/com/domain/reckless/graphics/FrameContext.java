@@ -8,11 +8,8 @@ public interface FrameContext {
 
     Keyboard getKeyboard();
 
-    void renderScreen();
-
     int getScreenWidth();
 
     int getScreenHeight();
 
-    void centerScreenAt(int posx, int posy);
 }
