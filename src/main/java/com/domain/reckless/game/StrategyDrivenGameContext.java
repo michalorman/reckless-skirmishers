@@ -84,7 +84,7 @@ public class StrategyDrivenGameContext implements GameContext {
         }
 
         player = new Player();
-        player.pos = new Vect2D(50, 50);
+        player.pos = new Vect2D(0, 0);
         player.delta = new Vect2D(3.5, 3.5);
         objects.add(player);
     }
@@ -221,7 +221,11 @@ public class StrategyDrivenGameContext implements GameContext {
 
     @Override
     public Collection<? extends Renderable> getRenderableObjects() {
-        return new TreeSet<>(objects);
+        Collection<Renderable> renderables = new TreeSet<>();
+
+        renderables.addAll(objects);
+
+        return renderables;
     }
 
     @Override

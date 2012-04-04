@@ -19,6 +19,7 @@ public interface Assets {
     interface Fonts {
         String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ___/0123456789-.!?/%$\\=*+,;:()&#\"'";
 
-        BitmapFont font = BitmapFont.load("/assets/fonts/font_gold.png", LETTERS, 8, 8);
+        BitmapFont fontGold = BitmapFont.load("/assets/fonts/font_gold.png", LETTERS, 8, 8);
+        BitmapFont fontGray = BitmapFont.load("/assets/fonts/font_gray.png", LETTERS, 8, 8);
     }
 }

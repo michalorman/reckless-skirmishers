@@ -18,7 +18,7 @@ public class DefaultRenderStrategy implements RenderStrategy {
         for (Renderable renderable : renderables) {
             renderable.render(screen);
         }
-        screen.write(Assets.Fonts.font, 5, 5, fps + " FPS");
+        screen.write(Assets.Fonts.fontGold, 5, 5, fps + " FPS");
     }
 
     @Override
@@ -48,10 +48,10 @@ public class DefaultRenderStrategy implements RenderStrategy {
         screen.setOffset(0, 0);
 
         if (drawFps) {
-            screen.write(Assets.Fonts.font, 5, 5, fps + " FPS");
+            screen.write(Assets.Fonts.fontGold, 5, 5, fps + " FPS");
         }
         if (drawPlayerInfo) {
-            screen.write(Assets.Fonts.font, 5, 20, String.format("X: %d Y: %d", (int) context.getPlayer().pos.x, (int) context.getPlayer().pos.y));
+            screen.write(Assets.Fonts.fontGold, 5, 20, String.format("X: %d Y: %d", (int) context.getPlayer().pos.x, (int) context.getPlayer().pos.y));
         }
     }
 }
