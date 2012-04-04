@@ -27,10 +27,10 @@ public class Player extends GameObject {
     }
 
     public int getRenderPosX() {
-        return (int) pos.x + xRenderOffs;
+        return (int) pos.x - xRenderOffs;
     }
 
     public int getRenderPosY() {
-        return (int) pos.y + yRenderOffs;
+        return (int) pos.y - yRenderOffs;
     }
 }

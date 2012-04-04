@@ -20,6 +20,7 @@ public class InMemorySettings implements Settings {
         defaults.put(Setting.LOCALE, "en");
         defaults.put(Setting.DRAW_FPS, "true");
         defaults.put(Setting.DRAW_BBOX, "false");
+        defaults.put(Setting.DRAW_PLAYER_INFO, "false");
         defaults.put(Setting.SCREEN_WIDTH, "512");
         defaults.put(Setting.SCREEN_HEIGHT, "384");
         defaults.put(Setting.SCREEN_SCALE, "2");

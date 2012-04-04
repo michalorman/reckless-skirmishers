@@ -54,6 +54,8 @@ public interface GameContext {
     int getPlayerRenderPosX();
 
     int getPlayerRenderPosY();
+    
+    Player getPlayer();
 
     Settings getSettings();
 }

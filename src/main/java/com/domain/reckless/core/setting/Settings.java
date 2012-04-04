@@ -9,6 +9,7 @@ public interface Settings {
 
         DRAW_FPS,
         DRAW_BBOX,
+        DRAW_PLAYER_INFO,
 
         SCREEN_HEIGHT,
         SCREEN_WIDTH,

@@ -8,13 +8,28 @@ import com.domain.reckless.world.GameObject;
 // is reached picks another point.
 public class RandomDestAI extends AbstractAI {
 
-    public Vect2D lastPos;
-//    public double
+    public int xLast;
+    public int yLast;
+    public int posIdleCounter;
+    private static final int MAX_IDLE_COUTER = 50;
 
     @Override
     protected Vect2D doNextMove(GameObject object, GameContext context) {
         Vect2D delta = new Vect2D();
-        lastPos = new Vect2D(object.pos);
+
+        if (xLast != (int) object.pos.x || yLast != (int) object.pos.y) {
+            posIdleCounter = 0;
+            xLast = (int) object.pos.x;
+            yLast = (int) object.pos.y;
+        } else {
+            ++posIdleCounter;
+            if (posIdleCounter == MAX_IDLE_COUTER / 2) {
+                object.dest = new Vect2D(-object.dest.x, -object.dest.y);
+            }
+            if (posIdleCounter >= MAX_IDLE_COUTER) {
+                object.dest = null;
+            }
+        }
 
         if (object.dest == null) {
             // pick new destination
