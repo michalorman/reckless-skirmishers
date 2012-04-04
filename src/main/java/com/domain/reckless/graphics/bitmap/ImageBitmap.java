@@ -1,5 +1,7 @@
 package com.domain.reckless.graphics.bitmap;
 
+import com.domain.reckless.graphics.utils.GraphicsUtils;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -9,7 +11,7 @@ public class ImageBitmap extends Bitmap {
 
     public ImageBitmap(int w, int h) {
         super(w, h, false);
-        image = getCompatibleImage(w, h);
+        image = GraphicsUtils.createCompatibleBufferedImage(w, h);
         pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     }
 
@@ -17,9 +19,4 @@ public class ImageBitmap extends Bitmap {
         return image;
     }
 
-    private static BufferedImage getCompatibleImage(int w, int h) {
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsConfiguration config = env.getDefaultScreenDevice().getDefaultConfiguration();
-        return config.createCompatibleImage(w, h);
-    }
 }

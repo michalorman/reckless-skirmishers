@@ -63,8 +63,8 @@ public class SwingApplicationFrame extends JFrame implements FrameContext {
                 g.drawImage(screen.getImage(), 0, 0, screen.getWidth(), screen.getHeight(), null);
                 g.dispose();
             } while (bufferStrategy.contentsRestored());
+            bufferStrategy.show();
         } while (bufferStrategy.contentsLost());
-        bufferStrategy.show();
     }
 
     public Screen getScreen() {

@@ -3,7 +3,7 @@ package com.domain.reckless.graphics.bitmap;
 import com.domain.reckless.graphics.RGB;
 import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.graphics.font.BitmapFont;
-import com.domain.reckless.graphics.utils.PixelUtils;
+import com.domain.reckless.graphics.utils.GraphicsUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -28,6 +28,7 @@ public class Bitmap {
     public void putPixel(int x, int y, int col) {
         if (isValidPosition(x, y)) {
             pixels[y * w + x] = 0xff000000 | col;
+            pixels[y * w + x] = 0xff000000 | col;
         }
     }
 
@@ -37,7 +38,7 @@ public class Bitmap {
             int g = col & 0xff00;
             int b = col & 0xff;
             int result = (alpha << 24) | r | g | b;
-            pixels[y * w + x] = PixelUtils.blendColors(pixels[y * w + x], result);
+            pixels[y * w + x] = GraphicsUtils.blendColors(pixels[y * w + x], result);
         }
     }
 
@@ -60,7 +61,7 @@ public class Bitmap {
                     pixels[targetPixel + xx] = col;
                 } else {
                     int bgCol = pixels[targetPixel + xx];
-                    pixels[targetPixel + xx] = PixelUtils.blendColors(bgCol, col);
+                    pixels[targetPixel + xx] = GraphicsUtils.blendColors(bgCol, col);
                 }
             }
         }
@@ -79,7 +80,7 @@ public class Bitmap {
                 if (rgb.alpha > 0) {
                     int col = (alpha << 24) | rgb.r | rgb.g | rgb.b;
                     int bgCol = pixels[targetPixel + xx];
-                    pixels[targetPixel + xx] = PixelUtils.blendColors(bgCol, col);
+                    pixels[targetPixel + xx] = GraphicsUtils.blendColors(bgCol, col);
                 }
             }
         }
@@ -97,7 +98,7 @@ public class Bitmap {
             for (int xx = sourcePixel; xx < sourcePixel + blitWidth; xx++) {
                 int col = bitmap.pixels[xx];
                 if (col < 0) {//alpha > 0
-                    pixels[targetPixel + xx] = PixelUtils.blendColors(col, color);
+                    pixels[targetPixel + xx] = GraphicsUtils.blendColors(col, color);
                 }
             }
         }
