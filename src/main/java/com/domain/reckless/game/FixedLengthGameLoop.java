@@ -60,7 +60,6 @@ public class FixedLengthGameLoop implements GameLoop {
 
             while (now - lastUpdateTime >= UPDATES_INTERVAL && updatesCount < MAX_UPDATES_PER_RENDER) {
                 inputHandler.handle(context);
-                // ai handling here
                 updater.update(context);
                 lastUpdateTime += UPDATES_INTERVAL;
                 ++updatesCount;

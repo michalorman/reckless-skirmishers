@@ -45,4 +45,8 @@ public interface GameContext {
     Bitmap getLevelBitmap(int width, int height);
 
     GameContext dup();
+
+    int getLevelWidth();
+
+    int getLevelHeight();
 }

@@ -4,14 +4,14 @@ import com.domain.reckless.world.GameObject;
 
 public class FixedDurationAnimation implements Animation {
     // frame duration
-    public long duration;
+    private long duration;
 
     // number of frames
-    public int framesNo;
+    private int framesNo;
 
-    public int curFrame;
+    private int curFrame;
 
-    public long lastAnimAt;
+    private long lastAnimAt;
 
     private boolean isAnimating;
 

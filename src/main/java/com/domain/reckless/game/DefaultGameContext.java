@@ -6,8 +6,7 @@ import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.res.Assets;
 import com.domain.reckless.world.*;
-import com.domain.reckless.world.ai.RandomAI;
-import com.domain.reckless.world.ai.RandomDestAI;
+import com.domain.reckless.world.ai.SimpleAI;
 import com.domain.reckless.world.anim.FixedDurationAnimation;
 import com.domain.reckless.world.level.Level;
 import org.slf4j.Logger;
@@ -38,18 +37,18 @@ public class DefaultGameContext implements GameContext {
         this.level = level;
 
         // TODO: test objects
-        for (int i = 0; i < Math.random() * 4; i++) {
-            Enemy enemy = new Enemy(new RandomAI(),
+        for (int i = 0; i < 20 + Math.random() * 4; i++) {
+            Enemy enemy = new Enemy(new SimpleAI(),
                     Assets.Bitmaps.pharao,
                     new FixedDurationAnimation(250, 4, true),
                     new Rectangle(5, 20, 28, 32));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
-            enemy.delta = new Vect2D(4.75, 4.75);
+            enemy.delta = new Vect2D(1.75, 1.75);
             objects.add(enemy);
         }
 
-        for (int i = 0; i < 2 + Math.random() * 8; i++) {
-            Enemy enemy = new Enemy(new RandomDestAI(),
+        for (int i = 0; i < 40 + Math.random() * 8; i++) {
+            Enemy enemy = new Enemy(new SimpleAI(),
                     Assets.Bitmaps.mummy,
                     new FixedDurationAnimation(200, 4, true),
                     new Rectangle(5, 20, 28, 32));
@@ -59,7 +58,7 @@ public class DefaultGameContext implements GameContext {
         }
 
         for (int i = 0; i < 5 + Math.random() * 15; i++) {
-            Enemy enemy = new Enemy(new RandomDestAI(),
+            Enemy enemy = new Enemy(new SimpleAI(),
                     Assets.Bitmaps.snake,
                     new FixedDurationAnimation(75, 4, true),
                     new Rectangle(7, 20, 23, 30));
@@ -111,6 +110,16 @@ public class DefaultGameContext implements GameContext {
         DefaultGameContext ctx = new DefaultGameContext(level, settings);
         ctx.player.pos = player.pos;
         return ctx;
+    }
+
+    @Override
+    public int getLevelWidth() {
+        return level.bitmap.w;
+    }
+
+    @Override
+    public int getLevelHeight() {
+        return level.bitmap.h;
     }
 
     @Override

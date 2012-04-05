@@ -1,9 +1,12 @@
 package com.domain.reckless.world.ai;
 
-import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.game.GameContext;
 import com.domain.reckless.world.GameObject;
 
-public interface AI<T extends GameObject> {
-    void nextMove(T object, GameContext context, Keyboard keyboard);
+/**
+ * Interface for components handling AI that generates commands
+ * to given game object.
+ */
+public interface AI {
+    void command(GameContext context, GameObject object);
 }

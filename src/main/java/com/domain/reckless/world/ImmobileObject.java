@@ -4,7 +4,6 @@ import com.domain.reckless.graphics.Screen;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.res.Assets;
-import com.domain.reckless.world.ai.ImmobileAI;
 
 public class ImmobileObject extends GameObject {
     public Bitmap[][] tiles = Assets.Bitmaps.wallTiles;
@@ -15,7 +14,7 @@ public class ImmobileObject extends GameObject {
     }
 
     public ImmobileObject(int xTile) {
-        super(new ImmobileAI(), null, new Rectangle(0, 10, 32, 45));
+        super(null, null, new Rectangle(0, 10, 32, 45), null);
         this.xTile = xTile;
     }
 
