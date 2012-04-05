@@ -15,7 +15,7 @@ public class ScreenGameRenderer implements GameRenderer {
 
     private Screen screen;
     private long frames;
-    private double lastFramesUpdate;
+    private long lastFramesUpdate = System.currentTimeMillis();
     private long fps;
     private Settings settings;
     private long startTime = System.currentTimeMillis();
@@ -60,12 +60,12 @@ public class ScreenGameRenderer implements GameRenderer {
 
         if (drawFps) {
             ++frames;
-            double now = System.currentTimeMillis();
+            long now = System.currentTimeMillis();
 
             if (now - lastFramesUpdate >= 1000) {
                 fps = frames;
                 frames = 0;
-                lastFramesUpdate = now;
+                lastFramesUpdate += 1000;
             }
 
             screen.write(Assets.Fonts.fontGold, 5, 5, fps + " FPS");
