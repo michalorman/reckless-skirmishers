@@ -1,6 +1,10 @@
 package com.domain.reckless.world.level;
 
 import com.domain.reckless.graphics.bitmap.Bitmap;
+import com.domain.reckless.world.GameObject;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class Level {
 
@@ -13,6 +17,8 @@ public class Level {
     public int width;
 
     public int height;
+
+    private Collection<GameObject> objects = new ArrayList<>();
 
     public Level(int width, int height) {
         this.width = width;
@@ -37,5 +43,13 @@ public class Level {
 
     public void setTile(int x, int y, Tile tile) {
         tiles[y * width + x] = tile;
+    }
+
+    public Collection<? extends GameObject> getGameObjects() {
+        return objects;
+    }
+
+    public void addGameObject(GameObject object) {
+        objects.add(object);
     }
 }

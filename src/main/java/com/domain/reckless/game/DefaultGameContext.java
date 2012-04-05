@@ -71,6 +71,7 @@ public class DefaultGameContext implements GameContext {
         player.pos = new Vect2D(0, 0);
         player.delta = new Vect2D(3.5, 3.5);
         objects.add(player);
+        objects.addAll(level.getGameObjects());
     }
 
     @Override

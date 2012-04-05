@@ -102,7 +102,7 @@ public class RecklessSkirmishers {
                     .title(i18n.t("game.ui.title"))
                     .build();
 
-            LevelLoader loader = new BitmapLevelLoader();
+            LevelLoader loader = new BitmapLevelLoader(frameContext);
 
             GameContext context = new DefaultGameContext(loader.load("/assets/levels/level1.png"), settings);
 
