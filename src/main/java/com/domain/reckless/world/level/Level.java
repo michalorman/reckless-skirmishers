@@ -34,4 +34,8 @@ public class Level {
     public Bitmap getBitmap(int x, int y, int width, int height) {
         return bitmap.cut(x, y, width, height);
     }
+
+    public void setTile(int x, int y, Tile tile) {
+        tiles[y * width + x] = tile;
+    }
 }
