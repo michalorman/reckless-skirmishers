@@ -10,6 +10,7 @@ public interface Settings {
         DRAW_FPS,
         DRAW_BBOX,
         DRAW_PLAYER_INFO,
+        DRAW_TIME,
 
         SCREEN_HEIGHT,
         SCREEN_WIDTH,

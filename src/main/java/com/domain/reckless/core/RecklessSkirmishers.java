@@ -35,7 +35,8 @@ public class RecklessSkirmishers {
 
         DRAW_FPS("drawFps", Settings.Setting.DRAW_FPS), // --drawFps=true|false
         DRAW_BBOX("drawBBox", Settings.Setting.DRAW_BBOX), // --drawBBox=true|false
-        DRAW_pLAYER_INFO("drawPlayerInfo", Settings.Setting.DRAW_PLAYER_INFO), // --drawBBox=true|false
+        DRAW_PLAYER_INFO("drawPlayerInfo", Settings.Setting.DRAW_PLAYER_INFO), // --drawPlayerInfo=true|false
+        DRAW_TIME("drawTime", Settings.Setting.DRAW_PLAYER_INFO), // --drawTime=true|false
 
         GAME_RES("gameRes") { // --gameRes=640x480
             @Override

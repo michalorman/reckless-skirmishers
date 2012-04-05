@@ -47,6 +47,8 @@ public class FixedLengthGameLoop implements GameLoop {
         double now;
         int updatesCount;
 
+//        double startSim = System.nanoTime();
+
         while (context.isRunning()) {
             now = System.nanoTime();
             updatesCount = 0;
@@ -62,6 +64,11 @@ public class FixedLengthGameLoop implements GameLoop {
                 renderer.render(context, delta);
                 lastRenderTime = now;
             }
+
+//            if (now - startSim >= 5 * NANOS_PER_SECOND) {
+//                context = context.dup();
+//                startSim = now;
+//            }
 
             try {
                 Thread.sleep(1);

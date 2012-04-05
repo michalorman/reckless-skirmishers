@@ -107,6 +107,13 @@ public class DefaultGameContext implements GameContext {
     }
 
     @Override
+    public GameContext dup() {
+        DefaultGameContext ctx = new DefaultGameContext(level, settings);
+        ctx.player.pos = player.pos;
+        return ctx;
+    }
+
+    @Override
     public int getPlayerRenderPosX() {
         return player.getRenderPosX();
     }

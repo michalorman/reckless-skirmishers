@@ -1,6 +1,5 @@
 package com.domain.reckless.game;
 
-import com.domain.reckless.core.setting.Settings;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.world.Collidable;
 import com.domain.reckless.world.Player;
@@ -44,4 +43,6 @@ public interface GameContext {
      * @return Level bitmap.
      */
     Bitmap getLevelBitmap(int width, int height);
+
+    GameContext dup();
 }

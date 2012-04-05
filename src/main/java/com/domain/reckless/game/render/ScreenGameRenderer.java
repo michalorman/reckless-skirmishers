@@ -18,6 +18,7 @@ public class ScreenGameRenderer implements GameRenderer {
     private double lastFramesUpdate;
     private long fps;
     private Settings settings;
+    private long startTime = System.currentTimeMillis();
 
     public ScreenGameRenderer(Screen screen, Settings settings) {
         this.settings = settings;
@@ -30,8 +31,7 @@ public class ScreenGameRenderer implements GameRenderer {
         boolean drawBBox = settings.getBool(Settings.Setting.DRAW_BBOX);
         boolean drawFps = settings.getBool(Settings.Setting.DRAW_FPS);
         boolean drawPlayerInfo = settings.getBool(Settings.Setting.DRAW_PLAYER_INFO);
-
-        screen.rectFill(0, 0, 600, 500, 0xff000000);
+        boolean drawTime = settings.getBool(Settings.Setting.DRAW_TIME);
 
         Bitmap bitmap = context.getLevelBitmap(screen.getWidth(), screen.getHeight());
         screen.blit(bitmap, 0, 0);
@@ -51,6 +51,11 @@ public class ScreenGameRenderer implements GameRenderer {
 
         if (drawPlayerInfo) {
             screen.write(Assets.Fonts.fontGold, 5, 20, String.format("X: %d Y: %d", (int) context.getPlayer().pos.x, (int) context.getPlayer().pos.y));
+        }
+
+        if (drawTime) {
+            long seconds = (System.currentTimeMillis() - startTime) / 1000;
+            screen.write(Assets.Fonts.fontGold, screen.getWidth() - 70, 5, String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60)));
         }
 
         if (drawFps) {
