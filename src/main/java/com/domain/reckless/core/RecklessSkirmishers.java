@@ -22,6 +22,8 @@ import com.domain.reckless.res.Assets;
 import com.domain.reckless.world.ImmobileObject;
 import com.domain.reckless.world.level.Level;
 import com.domain.reckless.world.level.Tile;
+import com.domain.reckless.world.level.loader.BitmapLevelLoader;
+import com.domain.reckless.world.level.loader.LevelLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -100,7 +102,9 @@ public class RecklessSkirmishers {
                     .title(i18n.t("game.ui.title"))
                     .build();
 
-            GameContext context = new DefaultGameContext(generateLevel(frameContext), settings);
+//            GameContext context = new DefaultGameContext(generateLevel(frameContext), settings);
+            LevelLoader loader = new BitmapLevelLoader();
+            GameContext context = new DefaultGameContext(loader.load("/assets/levels/level1.png"), settings);
 
             GameRenderer renderer = new ScreenGameRenderer(frameContext.getScreen(), settings);
 

@@ -22,4 +22,8 @@ public interface Assets {
         BitmapFont fontGold = BitmapFont.load("/assets/fonts/font_gold.png", LETTERS, 8, 8);
         BitmapFont fontGray = BitmapFont.load("/assets/fonts/font_gray.png", LETTERS, 8, 8);
     }
+
+    interface Levels {
+        Bitmap level1 = Bitmap.load("/asssets/levels/level1.png");
+    }
 }
