@@ -1,11 +1,14 @@
 package com.domain.reckless.world;
 
-import com.domain.reckless.core.controls.Keyboard;
 import com.domain.reckless.game.GameContext;
+import com.domain.reckless.game.command.GameCommand;
 import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.world.ai.AI;
 import com.domain.reckless.world.anim.Animation;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public abstract class GameObject
         implements Comparable<GameObject>, Renderable, Updateable, Collidable {
@@ -18,16 +21,23 @@ public abstract class GameObject
     public AI ai;
     public Animation animation;
 
+    private Queue<GameCommand> commands = new LinkedList<>();
+
     protected GameObject(AI ai, Animation animation, Rectangle boundingBox) {
         this.ai = ai;
         this.animation = animation;
         this.boundingBox = boundingBox;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void update(GameContext context, Keyboard keyboard) {
-        ai.nextMove(this, context, keyboard);
+    public void update(GameContext context) {
+        GameCommand command = null;
+         do {
+             command = commands.poll();
+             if (command != null) {
+                 command.execute(context, this);
+             }
+         } while (command != null);
     }
 
     /*
@@ -61,5 +71,9 @@ public abstract class GameObject
         Rectangle thisBB = getBoundingBox();
         Rectangle thatBB = collidable.getBoundingBox();
         return thisBB.intersects(thatBB);
+    }
+
+    public void addCommand(GameCommand command) {
+        commands.offer(command);
     }
 }

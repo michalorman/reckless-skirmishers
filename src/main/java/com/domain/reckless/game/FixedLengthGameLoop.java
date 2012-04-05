@@ -1,5 +1,6 @@
 package com.domain.reckless.game;
 
+import com.domain.reckless.game.input.GameInputHandler;
 import com.domain.reckless.game.render.GameRenderer;
 import com.domain.reckless.game.update.GameUpdater;
 import org.slf4j.Logger;
@@ -20,7 +21,7 @@ public class FixedLengthGameLoop implements GameLoop {
     private static final double UPDATES_INTERVAL = NANOS_PER_SECOND / UPDATES_RATE;
 
     // desired frame rate
-    private static final double FRAMES_RATE = 120;
+    private static final double FRAMES_RATE = 60;
 
     // time between each render
     private static final double RENDERS_INTERVAL = NANOS_PER_SECOND / FRAMES_RATE;
@@ -31,11 +32,15 @@ public class FixedLengthGameLoop implements GameLoop {
 
     private GameUpdater updater;
 
-    public FixedLengthGameLoop(GameContext context, GameRenderer renderer, GameUpdater updater) {
+    private GameInputHandler inputHandler;
+
+    public FixedLengthGameLoop(GameContext context, GameRenderer renderer, GameUpdater updater,
+                               GameInputHandler inputHandler) {
         LOGGER.info("Initializing default game loop");
         this.renderer = renderer;
         this.updater = updater;
         this.context = context;
+        this.inputHandler = inputHandler;
     }
 
     public void run() {
@@ -54,6 +59,8 @@ public class FixedLengthGameLoop implements GameLoop {
             updatesCount = 0;
 
             while (now - lastUpdateTime >= UPDATES_INTERVAL && updatesCount < MAX_UPDATES_PER_RENDER) {
+                inputHandler.handle(context);
+                // ai handling here
                 updater.update(context);
                 lastUpdateTime += UPDATES_INTERVAL;
                 ++updatesCount;

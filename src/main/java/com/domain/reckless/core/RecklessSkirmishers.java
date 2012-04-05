@@ -6,9 +6,11 @@ import com.domain.reckless.game.DefaultGameContext;
 import com.domain.reckless.game.FixedLengthGameLoop;
 import com.domain.reckless.game.GameContext;
 import com.domain.reckless.game.GameLoop;
+import com.domain.reckless.game.input.GameInputHandler;
+import com.domain.reckless.game.input.KeyboardGameInputHandler;
 import com.domain.reckless.game.render.GameRenderer;
 import com.domain.reckless.game.update.GameUpdater;
-import com.domain.reckless.game.update.KeybordInputGameUpdater;
+import com.domain.reckless.game.update.SimpleGameUpdater;
 import com.domain.reckless.game.render.ScreenGameRenderer;
 import com.domain.reckless.graphics.FrameContext;
 import com.domain.reckless.graphics.SwingApplicationFrame;
@@ -102,9 +104,11 @@ public class RecklessSkirmishers {
 
             GameRenderer renderer = new ScreenGameRenderer(frameContext.getScreen(), settings);
 
-            GameUpdater updater = new KeybordInputGameUpdater(frameContext.getKeyboard());
+            GameUpdater updater = new SimpleGameUpdater();
 
-            GameLoop gameLoop = new FixedLengthGameLoop(context, renderer, updater);
+            GameInputHandler inputHandler = new KeyboardGameInputHandler(frameContext.getKeyboard());
+
+            GameLoop gameLoop = new FixedLengthGameLoop(context, renderer, updater, inputHandler);
             Thread thread = new Thread(gameLoop);
             thread.start();
         } catch (IOException e) {
