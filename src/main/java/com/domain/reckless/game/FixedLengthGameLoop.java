@@ -20,7 +20,7 @@ public class FixedLengthGameLoop implements GameLoop {
     private static final double UPDATES_INTERVAL = NANOS_PER_SECOND / UPDATES_RATE;
 
     // desired frame rate
-    private static final double FRAMES_RATE = 120;
+    private static final double FRAMES_RATE = 60;
 
     // time between each render
     private static final double RENDERS_INTERVAL = NANOS_PER_SECOND / FRAMES_RATE;
