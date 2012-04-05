@@ -6,6 +6,7 @@ import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.math.Vect2D;
 import com.domain.reckless.res.Assets;
 import com.domain.reckless.world.*;
+import com.domain.reckless.world.ai.RandomAI;
 import com.domain.reckless.world.ai.RandomDestAI;
 import com.domain.reckless.world.anim.FixedDurationAnimation;
 import com.domain.reckless.world.level.Level;
@@ -32,18 +33,18 @@ public class DefaultGameContext implements GameContext {
     private Settings settings;
 
     public DefaultGameContext(Level level, Settings settings) {
-        LOGGER.info("Creating strategy driven game context");
+        LOGGER.info("Creating default game context");
         this.settings = settings;
         this.level = level;
 
         // TODO: test objects
         for (int i = 0; i < Math.random() * 4; i++) {
-            Enemy enemy = new Enemy(new RandomDestAI(),
+            Enemy enemy = new Enemy(new RandomAI(),
                     Assets.Bitmaps.pharao,
                     new FixedDurationAnimation(250, 4, true),
                     new Rectangle(5, 20, 28, 32));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
-            enemy.delta = new Vect2D(0.75, 0.75);
+            enemy.delta = new Vect2D(4.75, 4.75);
             objects.add(enemy);
         }
 
@@ -61,7 +62,7 @@ public class DefaultGameContext implements GameContext {
             Enemy enemy = new Enemy(new RandomDestAI(),
                     Assets.Bitmaps.snake,
                     new FixedDurationAnimation(75, 4, true),
-                    new Rectangle(10, 25, 20, 32));
+                    new Rectangle(7, 20, 23, 30));
             enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
             enemy.delta = new Vect2D(2.75, 2.75);
             objects.add(enemy);

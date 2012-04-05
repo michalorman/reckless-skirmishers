@@ -40,7 +40,7 @@ public class ScreenGameRenderer implements GameRenderer {
                 context.getPlayerRenderPosY());
 
         for (Renderable renderable : context.getRenderableObjects()) {
-            renderable.render(screen);
+            renderable.render(screen, interpolation);
 
             if (drawBBox && renderable instanceof Collidable) {
                 screen.rectFill(((Collidable) renderable).getBoundingBox(), 0x55ff00ff);

@@ -19,7 +19,7 @@ public class Player extends GameObject {
     }
 
     @Override
-    public void render(Screen screen) {
+    public void render(Screen screen, float interpolation) {
         Bitmap image = Assets.Bitmaps.player[facing][animation.nextFrameIndex(this)];
         screen.blit(image,
                 (int) pos.x - image.getWidth() / 2,

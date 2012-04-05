@@ -52,6 +52,12 @@ public class KeybordInputAI extends AbstractAI<Player> {
         if (keyboard.isKeyPressed(KeyEvent.VK_S)) {
             player.ai = new StunAI(player.ai, 3000);
         }
+        if (keyboard.isKeyPressed(KeyEvent.VK_T)) {
+            player.delta = new Vect2D(10, 10);
+        }
+        if (keyboard.isKeyPressed(KeyEvent.VK_Q)) {
+            player.ai = new RandomDestAI();
+        }
         return delta;
     }
 }

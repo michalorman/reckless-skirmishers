@@ -17,7 +17,7 @@ public class Enemy extends GameObject {
     }
 
     @Override
-    public void render(Screen screen) {
+    public void render(Screen screen, float interpolation) {
         Bitmap image = bitmap[facing][animation.nextFrameIndex(this)];
         screen.blit(image,
                 (int) pos.x - image.getWidth() / 2,

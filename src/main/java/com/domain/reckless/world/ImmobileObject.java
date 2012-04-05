@@ -20,7 +20,7 @@ public class ImmobileObject extends GameObject {
     }
 
     @Override
-    public void render(Screen screen) {
+    public void render(Screen screen, float interpolation) {
         Bitmap image = tiles[0][xTile];
         screen.blit(image,
                 (int) pos.x - image.getWidth() / 2,
