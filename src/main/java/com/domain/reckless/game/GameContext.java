@@ -2,7 +2,7 @@ package com.domain.reckless.game;
 
 import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.world.Collidable;
-import com.domain.reckless.world.Player;
+import com.domain.reckless.world.GameObject;
 import com.domain.reckless.world.Renderable;
 import com.domain.reckless.world.Updateable;
 
@@ -31,8 +31,6 @@ public interface GameContext {
 
     int getPlayerRenderPosY();
 
-    Player getPlayer();
-
     /**
      * Cuts level bitmap relatively to players position with specified
      * width and height which should be set to width and height of the
@@ -49,4 +47,6 @@ public interface GameContext {
     int getLevelWidth();
 
     int getLevelHeight();
+
+    GameObject getPlayer();
 }

@@ -3,7 +3,7 @@ package com.domain.reckless.game;
 import com.domain.reckless.core.setting.Settings;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.graphics.common.Rectangle;
-import com.domain.reckless.math.Vect2D;
+import com.domain.reckless.math.Vect2d;
 import com.domain.reckless.res.Assets;
 import com.domain.reckless.world.*;
 import com.domain.reckless.world.ai.SimpleAI;
@@ -27,7 +27,7 @@ public class DefaultGameContext implements GameContext {
 
     private Collection<GameObject> objects = new ArrayList<>();
 
-    private Player player;
+    private GameObject player;
 
     private Settings settings;
 
@@ -38,38 +38,36 @@ public class DefaultGameContext implements GameContext {
 
         // TODO: test objects
         for (int i = 0; i < 20 + Math.random() * 4; i++) {
-            Enemy enemy = new Enemy(new SimpleAI(),
-                    Assets.Bitmaps.pharao,
-                    new FixedDurationAnimation(250, 4, true),
-                    new Rectangle(5, 20, 28, 32));
-            enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
-            enemy.delta = new Vect2D(1.75, 1.75);
-            objects.add(enemy);
+            GameObject object = new GameObject(GameObjectSpec.PHARAO);
+            object.setAi(new SimpleAI());
+            object.setAnimation(new FixedDurationAnimation(250, 4, true));
+            object.pos = new Vect2d(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
+            object.delta = new Vect2d(1.75, 1.75);
+            objects.add(object);
         }
 
         for (int i = 0; i < 40 + Math.random() * 8; i++) {
-            Enemy enemy = new Enemy(new SimpleAI(),
-                    Assets.Bitmaps.mummy,
-                    new FixedDurationAnimation(200, 4, true),
-                    new Rectangle(5, 20, 28, 32));
-            enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
-            enemy.delta = new Vect2D(0.5 + Math.random(), 0.5 + Math.random());
-            objects.add(enemy);
+            GameObject object = new GameObject(GameObjectSpec.MUMMY);
+            object.setAi(new SimpleAI());
+            object.setAnimation(new FixedDurationAnimation(200, 4, true));
+            object.pos = new Vect2d(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
+            object.delta = new Vect2d(0.5 + Math.random(), 0.5 + Math.random());
+            objects.add(object);
         }
 
         for (int i = 0; i < 5 + Math.random() * 15; i++) {
-            Enemy enemy = new Enemy(new SimpleAI(),
-                    Assets.Bitmaps.snake,
-                    new FixedDurationAnimation(75, 4, true),
-                    new Rectangle(7, 20, 23, 30));
-            enemy.pos = new Vect2D(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
-            enemy.delta = new Vect2D(2.75, 2.75);
-            objects.add(enemy);
+            GameObject object = new GameObject(GameObjectSpec.SNAKE);
+            object.setAi(new SimpleAI());
+            object.setAnimation(new FixedDurationAnimation(75, 4, true));
+            object.pos = new Vect2d(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
+            object.delta = new Vect2d(2.75, 2.75);
+            objects.add(object);
         }
 
-        player = new Player();
-        player.pos = new Vect2D(0, 0);
-        player.delta = new Vect2D(3.5, 3.5);
+        player = new GameObject(GameObjectSpec.PLAYER);
+        player.setAnimation(new FixedDurationAnimation(100, 6, true));
+        player.pos = new Vect2d(0, 0);
+        player.delta = new Vect2d(3.5, 3.5);
         objects.add(player);
         objects.addAll(level.getGameObjects());
     }
@@ -124,6 +122,11 @@ public class DefaultGameContext implements GameContext {
     }
 
     @Override
+    public GameObject getPlayer() {
+        return player;
+    }
+
+    @Override
     public int getPlayerRenderPosX() {
         return player.getRenderPosX();
     }
@@ -131,10 +134,5 @@ public class DefaultGameContext implements GameContext {
     @Override
     public int getPlayerRenderPosY() {
         return player.getRenderPosY();
-    }
-
-    @Override
-    public Player getPlayer() {
-        return player;
     }
 }

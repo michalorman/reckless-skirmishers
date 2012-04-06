@@ -1,19 +1,19 @@
 package com.domain.reckless.math;
 
-public class Vect2D {
+public class Vect2d {
 
     public double x, y;
 
-    public Vect2D() {
+    public Vect2d() {
         this(0, 0);
     }
 
-    public Vect2D(double x, double y) {
+    public Vect2d(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public Vect2D(Vect2D other) {
+    public Vect2d(Vect2d other) {
         this(other.x, other.y);
     }
 
@@ -22,10 +22,10 @@ public class Vect2D {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Vect2D vect2D = (Vect2D) o;
+        Vect2d vect2d = (Vect2d) o;
 
-        if (Double.compare(vect2D.x, x) != 0) return false;
-        if (Double.compare(vect2D.y, y) != 0) return false;
+        if (Double.compare(vect2d.x, x) != 0) return false;
+        if (Double.compare(vect2d.y, y) != 0) return false;
 
         return true;
     }

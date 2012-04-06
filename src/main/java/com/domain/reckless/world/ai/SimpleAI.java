@@ -1,12 +1,13 @@
 package com.domain.reckless.world.ai;
 
 import com.domain.reckless.game.GameContext;
+import com.domain.reckless.game.command.IdleCommand;
 import com.domain.reckless.game.command.MoveCommand;
-import com.domain.reckless.math.Vect2D;
+import com.domain.reckless.math.Vect2d;
 import com.domain.reckless.world.GameObject;
 
 public class SimpleAI implements AI {
-    private Vect2D dest;
+    private Vect2d dest;
     private long idleTo;
     private int xLast;
     private int yLast;
@@ -26,15 +27,17 @@ public class SimpleAI implements AI {
             }
         }
 
-        if (dest == null) {
-            dest = new Vect2D(Math.random() * context.getLevelWidth(),
-                    Math.random() * context.getLevelHeight());
-        }
-
         long now = System.currentTimeMillis();
 
         if ((now - 10000 >= idleTo) && Math.random() * 10 > 9) {
             idleTo = now + 500 + (long) (Math.random() * 1500);
+            dest = null;
+        }
+
+        if (dest == null) {
+            dest = new Vect2d(Math.random() * context.getLevelWidth(),
+                    Math.random() * context.getLevelHeight());
+            object.addCommand(new IdleCommand());
         }
 
         if (now >= idleTo) {

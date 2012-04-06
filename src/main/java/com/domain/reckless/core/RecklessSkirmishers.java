@@ -17,7 +17,7 @@ import com.domain.reckless.graphics.SwingApplicationFrame;
 import com.domain.reckless.graphics.bitmap.Bitmap;
 import com.domain.reckless.i18n.I18n;
 import com.domain.reckless.i18n.PropertiesI18n;
-import com.domain.reckless.math.Vect2D;
+import com.domain.reckless.math.Vect2d;
 import com.domain.reckless.res.Assets;
 import com.domain.reckless.world.ImmobileObject;
 import com.domain.reckless.world.level.Level;
@@ -214,7 +214,7 @@ public class RecklessSkirmishers {
                 level.tiles[y * level.width + x] = new Tile(tiles[tileCode]);
                 if (mapCode >= 50) {
                     ImmobileObject im = new ImmobileObject(mapCode - 50);
-                    im.pos = new Vect2D(x * 32 - frameContext.getScreenWidth() / 2,
+                    im.pos = new Vect2d(x * 32 - frameContext.getScreenWidth() / 2,
                             y * 32 - 12 - frameContext.getScreenHeight() / 2);
                 }
             }

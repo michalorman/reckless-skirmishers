@@ -4,6 +4,10 @@ import com.domain.reckless.game.GameContext;
 import com.domain.reckless.world.Collidable;
 import com.domain.reckless.world.GameObject;
 
+/**
+ * Enumeration of commands which commands game object to move
+ * certain direction.
+ */
 public enum MoveCommand implements GameCommand {
     MOVE_N(0, -1, GameObject.Facing.N),
     MOVE_NE(1, -1, GameObject.Facing.NE),
