@@ -1,6 +1,7 @@
 package com.domain.reckless.game.command;
 
 import com.domain.reckless.game.GameContext;
+import com.domain.reckless.math.Vect2d;
 import com.domain.reckless.world.Collidable;
 import com.domain.reckless.world.GameObject;
 
@@ -40,11 +41,11 @@ public enum MoveCommand implements GameCommand {
             yDelta = dy * deltaMean * Math.sqrt(2) / 2;
         }
 
-        object.pos.x += xDelta;
-        object.pos.y += yDelta;
-
         object.setCurrentFacing(facing);
         object.animate();
+
+        object.pos.x += xDelta;
+        object.pos.y += yDelta;
 
         for (Collidable collidable : context.getCollidableObjects()) {
             if (object != collidable) {

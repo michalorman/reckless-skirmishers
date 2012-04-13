@@ -17,7 +17,7 @@ public class DefaultConsole implements Console {
     }
 
     @Override
-    public void render(Screen screen, float interpolation) {
+    public void render(Screen screen) {
         if (isVisible) {
             screen.write(Assets.Fonts.fontGray, 5, screen.getHeight() - 10, "> ");
         }

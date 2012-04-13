@@ -15,7 +15,7 @@ public class FixedLengthGameLoop implements GameLoop {
     private static final double NANOS_PER_SECOND = 1000000000;
 
     // desired updates rate
-    private static final double UPDATES_RATE = 30;
+    private static final double UPDATES_RATE = 60;
 
     // time between game updates
     private static final double UPDATES_INTERVAL = NANOS_PER_SECOND / UPDATES_RATE;
@@ -52,8 +52,6 @@ public class FixedLengthGameLoop implements GameLoop {
         double now;
         int updatesCount;
 
-//        double startSim = System.nanoTime();
-
         while (context.isRunning()) {
             now = System.nanoTime();
             updatesCount = 0;
@@ -66,15 +64,9 @@ public class FixedLengthGameLoop implements GameLoop {
             }
 
             if (now - lastRenderTime >= RENDERS_INTERVAL) {
-                float delta = Math.min(1.0f, (float) ((now - lastUpdateTime) / UPDATES_INTERVAL));
-                renderer.render(context, delta);
+                renderer.render(context);
                 lastRenderTime += RENDERS_INTERVAL;
             }
-
-//            if (now - startSim >= 5 * NANOS_PER_SECOND) {
-//                context = context.dup();
-//                startSim = now;
-//            }
 
             try {
                 Thread.sleep(1);

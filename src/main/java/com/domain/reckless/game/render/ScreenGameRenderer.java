@@ -27,7 +27,7 @@ public class ScreenGameRenderer implements GameRenderer {
     }
 
     @Override
-    public void render(GameContext context, float interpolation) {
+    public void render(GameContext context) {
         boolean drawBBox = settings.getBool(Settings.Setting.DRAW_BBOX);
         boolean drawFps = settings.getBool(Settings.Setting.DRAW_FPS);
         boolean drawPlayerInfo = settings.getBool(Settings.Setting.DRAW_PLAYER_INFO);
@@ -40,7 +40,7 @@ public class ScreenGameRenderer implements GameRenderer {
                 context.getPlayerRenderPosY());
 
         for (Renderable renderable : context.getRenderableObjects()) {
-            renderable.render(screen, interpolation);
+            renderable.render(screen);
 
             if (drawBBox && renderable instanceof Collidable) {
                 screen.rectFill(((Collidable) renderable).getBoundingBox(), 0x55ff00ff);

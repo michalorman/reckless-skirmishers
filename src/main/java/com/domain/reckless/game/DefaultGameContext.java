@@ -2,9 +2,7 @@ package com.domain.reckless.game;
 
 import com.domain.reckless.core.setting.Settings;
 import com.domain.reckless.graphics.bitmap.Bitmap;
-import com.domain.reckless.graphics.common.Rectangle;
 import com.domain.reckless.math.Vect2d;
-import com.domain.reckless.res.Assets;
 import com.domain.reckless.world.*;
 import com.domain.reckless.world.ai.SimpleAI;
 import com.domain.reckless.world.anim.FixedDurationAnimation;
@@ -15,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeSet;
+
+import static com.domain.reckless.Constants.Speed.*;
 
 /**
  * Implementation of {@link GameContext} that delegates update and render action
@@ -42,7 +42,7 @@ public class DefaultGameContext implements GameContext {
             object.setAi(new SimpleAI());
             object.setAnimation(new FixedDurationAnimation(250, 4, true));
             object.pos = new Vect2d(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
-            object.delta = new Vect2d(1.75, 1.75);
+            object.delta = new Vect2d(VERY_SLOW, VERY_SLOW);
             objects.add(object);
         }
 
@@ -51,7 +51,7 @@ public class DefaultGameContext implements GameContext {
             object.setAi(new SimpleAI());
             object.setAnimation(new FixedDurationAnimation(200, 4, true));
             object.pos = new Vect2d(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
-            object.delta = new Vect2d(0.5 + Math.random(), 0.5 + Math.random());
+            object.delta = new Vect2d(SLOW, SLOW);
             objects.add(object);
         }
 
@@ -60,14 +60,14 @@ public class DefaultGameContext implements GameContext {
             object.setAi(new SimpleAI());
             object.setAnimation(new FixedDurationAnimation(75, 4, true));
             object.pos = new Vect2d(Math.random() * level.bitmap.getWidth() - 100, Math.random() * level.bitmap.getHeight() - 100);
-            object.delta = new Vect2d(2.75, 2.75);
+            object.delta = new Vect2d(VERY_FAST, VERY_FAST);
             objects.add(object);
         }
 
         player = new GameObject(GameObjectSpec.PLAYER);
         player.setAnimation(new FixedDurationAnimation(100, 6, true));
         player.pos = new Vect2d(0, 0);
-        player.delta = new Vect2d(3.5, 3.5);
+        player.delta = new Vect2d(NORMAL, NORMAL);
         objects.add(player);
         objects.addAll(level.getGameObjects());
     }

@@ -48,8 +48,8 @@ public class GameObject
      */
     protected Bitmap[][] sheet;
 
-    private int bitmapHalfWidth;
-    private int bitmapHalfHeight;
+    private double bitmapHalfWidth;
+    private double bitmapHalfHeight;
 
     public GameObject(GameObjectSpec spec) {
         this.boundingBox = spec.getBoundingBox();
@@ -69,11 +69,11 @@ public class GameObject
     }
 
     @Override
-    public void render(Screen screen, float interpolation) {
+    public void render(Screen screen) {
         Bitmap image = sheet[facings.get(currentFacing)][animation.nextFrameIndex(this)];
-        screen.blit(image,
-                (int) pos.x - bitmapHalfWidth,
-                (int) pos.y - bitmapHalfHeight);
+        int drawXX = (int) (pos.x - bitmapHalfWidth);
+        int drawYY = (int) (pos.y - bitmapHalfHeight);
+        screen.blit(image, drawXX, drawYY);
     }
 
     @Override
@@ -140,10 +140,10 @@ public class GameObject
     }
 
     public int getRenderPosX() {
-        return (int) pos.x - bitmapHalfWidth;
+        return (int) (pos.x - bitmapHalfWidth);
     }
 
     public int getRenderPosY() {
-        return (int) pos.y - bitmapHalfHeight;
+        return (int) (pos.y - bitmapHalfHeight);
     }
 }

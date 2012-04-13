@@ -4,6 +4,6 @@ import com.domain.reckless.game.GameContext;
 
 public interface GameRenderer {
 
-    void render(GameContext context, float interpolation);
+    void render(GameContext context);
 
 }
