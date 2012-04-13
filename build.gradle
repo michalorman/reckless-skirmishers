@@ -9,6 +9,7 @@ repositories {
 }
 
 dependencies {
+    compile fileTree( dir: 'lib', include: '*.jar')
     compile 'ch.qos.logback:logback-classic:1.0.1'
     compile 'org.slf4j:slf4j-api:1.6.4'
 }
